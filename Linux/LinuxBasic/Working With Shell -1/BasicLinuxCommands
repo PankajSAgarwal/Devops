@@ -1,0 +1,35 @@
+1. mkdir -p India/Mumbai // creates the Directory India and then Mumbai
+
+2. pushd - this command remembers the current working directory before changing to the directory in the command argument
+
+chaninging to /etc from home directory
+[~] pushd /etc
+
+cd /var
+cd /tmp
+
+popd - return back to the original directory before push
+popd //returns back to ~ # last directory pushed will be popped
+
+3. cat > Africa/Egypt/Cairo/city.txt
+Cairo
+
+ctrl + D - to exit out of the file
+
+4. create a new empty file 
+
+touch /home/michael/Asia/India/Country.txt
+
+5. Pagers
+
+a. more new_file.txt - loads the entire file at a time . Not the best choice while dealing with large files
+
+use [space] - scrolls the display , one screenful of data at a time.
+[Enter] - scrolls the display one line
+[b] - scrolls the display backwards one screefull of data at a time
+[/] - serach text
+
+b. less new_file.txt - 
+[up arrow] - scrolls up the display one line
+[down arrow] - scrolls down the display one line
+[/] - search text 

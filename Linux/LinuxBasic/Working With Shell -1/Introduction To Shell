@@ -1,0 +1,30 @@
+1. echo -n Hello // prints Hello without a trailing line 
+2. Internal commands - inbuilt in the shell , comes bundle with it
+echo,cd ,pwd , set etc.
+3. External commands - binary programs or scripts usually locate in distinct files in the system. They come pre-installed with distribution package manager or can be created and installed by the user.
+mv, date,uptime,cp, etc
+4. To Determine if a command is internal or external
+
+type echo //echo is a shell built in command 
+type mv // mv is hashed (/bin/mv)
+Quiz
+
+1.Which symbol represents a user's home directory in Linux?
+
+Ans : $
+
+2. Which directory contains the user home directories by default?
+
+Ans: /home
+
+3. Which command would you use to find out the type of a command?
+
+Ans : type
+
+4. In the command "echo -n hello", what is "echo"
+
+Ans : command
+
+5. In the command "echo -n hello", what is "-n"
+
+Ans: option

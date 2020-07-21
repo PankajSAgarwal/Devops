@@ -1,0 +1,88 @@
+1. Shell types
+
+Bourne shell (sh)
+C shell (csh or tcsh)
+
+Korn shell(ksh)
+
+Z shell(zsh)
+
+Bourne again shell(bash)
+
+2. to check shell being used 
+echo $SHELL
+3. to change defaul shell
+
+chsh
+3. alias 
+
+dt date
+dt
+
+4. history - to get the list of previously run commands
+
+5. env - list of all environment variables
+
+6. to set an enviornment variable use export command
+
+export OFFICE = caleston // applies to current shell and all program started by the shell
+
+OFFICE = caleston // applies to the variable within the` shell only and doesnt carry forward to any process
+
+7. to persist changes to environment variable through reboot, add them to ~/.profile or ~/.pam_environment in user home directory
+
+8. To see the path variable 
+
+echo $PATH
+9.which - to find the path of a command 
+
+which obs-studio
+obs-studio : command not found 
+
+to add it to the path
+
+export PATH=$PATH:/opt/obs/bin
+
+which obs-studio
+o/p : /opt/obs/bin/obs-studio
+
+10 customise Bash Prompt - useful when a user working on multiple server so that it is easy to identify the type of shell
+
+echo $PS1
+
+[\W]$  - \W - Present working directory
+         $ - Prompt symbol
+
+[~]$ PS1 = "ubuntu-server:"
+
+ubuntu-server: echo $PS1
+ubuntu-server:
+
+ubuntu-server:PS1="[\d \t \u@\h:\w ] $"
+
+[Thu Mar 12 22:12:54 bob@caleston:~] $
+
+11. Create a new environment variable called PROJECT=MERCURY and make it persistent by adding the variable to the ~/.profile file.
+
+export PROJECT=MERCURY
+echo 'export PROJECT=MERCURY' >> /home/bob/.profile
+
+12. Which of the following directories is not part of the PATH variable?
+
+echo $PATH
+
+13. Set an alias called up for the command uptime and make it persistent by adding to ~.profile file.
+
+alias up=uptime
+echo 'alias up=uptime' >> /home/bob/.profile
+
+14 . Update Bob's prompt so that it displays the date as per the format below:
+
+
+Example: [Wed Apr 22]bob@caleston-lp10:~$
+Make sure the change is made persistent.
+
+PS1='[\d]\u@\h:\w$'
+echo 'PS1=[\d]\u@\h:\w$' >> ~/.profile
+
+

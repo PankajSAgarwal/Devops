@@ -1,0 +1,17 @@
+1. whatis - displays one line description of what a command does 
+
+e.g whatis date
+
+date(1) - print or set the system date or time2
+
+2. man date
+
+3. date --help
+
+4. apropos - will serach through man page names and descriptions for instances
+of a keyword This is useful when u want to lookup all commands within the system that contains a specific keyword.
+
+e.g apropos modpr
+
+modprobe(8) - add and remove modules from the linux kernel
+modprobe.d - configuration directory for modprobe.
