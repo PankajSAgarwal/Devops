@@ -1,0 +1,42 @@
+1. Every object in linux can be considered as a type of file
+2. 3 types of files
+- Regular File
+- Directory File
+- Special Files
+
+3. Special files can be sub-categorized into 5 types
+
+a. Character files - These files represents devices under /dev file system that allows the OS to communicate to IO devices serially. e.g include devices such as mouse and keyboard.
+
+b. Block files - These are files representing block devices also located under /dev file system. A block device reads from and writes to the device in blocks or a chunk of data.E.g of block devices are HardDisk and RAM.
+
+c. Links - Links in Linux is a way to associate two or more file names to the same set of file data.There are two types of links.
+
+i. The hard link - associate two or more file names that share the same block of data on the physical disk.Although they behave as independent files , deleting one link will delete the data.
+ii. The Symbolic link or the symlink can be loosely compared to a shortcut in Windows.
+They act as pointers to another files . Deleting a symlink does not affect the data in the actual file.
+
+d. Socket files - A socket is a special file that enables the communication between two processes .
+
+e. Named pipes - This is a special type of file that allows connecting one process as an input to another. The data flow in a pipe is uni directional from the first process to the second.
+
+4. How to identify different types of files in Linux
+
+a. use of file command
+
+[~] $ file /home/michael
+
+output : /home/michael/: directory
+
+b. ls -ld /home/michael
+
+FileType                                    Identifier
+
+DIRECTORY                                     d
+REGULAR FILE                                  -
+CHARACTER DEVICE                              c
+LINK                                          l
+SOCKET FILE                                   s
+PIPE                                          p
+BLOCK DEVICE                                  b
+

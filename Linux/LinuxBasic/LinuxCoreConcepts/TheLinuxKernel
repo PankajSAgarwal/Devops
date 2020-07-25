@@ -1,0 +1,46 @@
+1. Kernel is the core inetrface between a computer's hardware resources and its applications/process. 
+
+2. Linux kernel performs 4 major tasks:
+a. Memory management
+b. Process management
+c. Device drivers
+d. System calls and Security
+
+3. Linux kernel is monolitic . This means that kernel caaries out CPU scheduling , memory management and several other operations by itself.
+4. Linux kernel is modular as well . it means it can extend its capabilities through the use of dynamically loading kernel modules
+
+4. uname - displays information about kernel
+[~] $ uname 
+Linux
+
+5. To pront the kernel version 
+
+[~]$ uname -r // uname -a
+4.15.0-72-generic
+
+4 - Kernel version
+15 - Major version
+0 - Minor version
+72 - patch release
+Generic - Distro Specific Information
+
+6. https://kernel.org - source code for liunux kernel
+
+7. One of the major task of linux kernel is memory management
+
+- Memroy divided into two spaces - Kernel space and User space . These are synonymous with kernel and user mode
+
+- Kernel space is the area of the memory where kernel execute and provides services. A process running in kernel space has un-restricted access to hardware as such it is strictly reserved for running the kernel code , kernel extensions and most device drivers.
+
+- All process running outside of kernel space resides in user space which has restricted access to CPU and memory
+
+- User programs gets access to data stored in memory or disks by making special calls called system calls to kernel.e.g allo of memory using variable or opening a file
+
+e.g cat /etc/os-release - opens a file to see the kernel version 
+other examples of system calls are 
+
+• open()
+• close()
+• readdir()
+• strlen()
+• closedir()

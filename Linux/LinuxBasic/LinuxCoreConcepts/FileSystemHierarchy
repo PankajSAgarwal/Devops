@@ -1,0 +1,22 @@
+1.                      /Root(Partition)
+---------------------------------------------------------------------
+|     |      |     |     |     |     |       |     |     |    |    |
+/bin  /boot /dev  /etc  /home /lib  /media  /mnt  /opt  /tmp /usr /var    
+
+2. /opt - Third party programs
+3. /mnt - used to mount filesystem temporarily in the system
+4./tmp - used to store temporary .
+5. /media - All external media like USB are mounted under the /media filesystem
+
+df -hP - prints out details about all the mounted filesystem.
+
+/dev filesystem contains the special block and character device files that were discussed earlier. This directory contains files for devices such as exter hard disk and devices such as the mouse and keyboards.
+
+6. /bin - the basic program and binaries such as cp, mkdir,mv, date commands, etc are located in /bin
+
+7. /etc - is a very important directory that is used to store most of the configuration files in linux.
+
+8. /lib and /lib64 is the palce to look for shared libraries to be imported into your programs
+9. /usr - In the older system,the /usr was used for user home directories. However,in the modern linux system, it is the loc where all userLand applications and their data reside.E.g of these applications are Thunderbird mail client, mozilla firefox,and vi text editor etc.
+
+10. /var - eventually you are bound to tun into issues with system or an application and when that happens take a look at the logs stored under the /var file system.This is the directory to which the system writes data such as logs and cached data.

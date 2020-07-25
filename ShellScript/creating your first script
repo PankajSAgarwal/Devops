@@ -1,0 +1,29 @@
+1. script commands
+
+mkdir lunar-mission
+
+rocket-add lunar-mission
+
+rocket-start-power lunar-mission
+rocket-internal-power lunar-mission
+rocket-start-sequence lunar-mission
+rocket-start-engine lunar-mission
+rocket-lift-off lunar-mission
+
+rocket-status lunar-mission
+
+2. to exceute scripts 
+
+bash create-and-launch-rocket.sh
+
+3. to add the script to path
+
+export PATH=$PATH:/home/pankaj
+
+4. which create-and-launch-rocket
+
+/home/pankaj/create-and-launch-rocket
+
+5. to add execute bit to the script
+
+chmod +x /home/pankaj/create-and-launch-rocket

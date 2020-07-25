@@ -1,0 +1,59 @@
+1. What is the init process used by this system?
+
+Ans : run: sudo ls -l /sbin/init to find out.
+
+lrwxrwxrwx 1 root root 20 Feb  6 15:00 /sbin/init -> /lib/systemd/systemd
+
+2. What is the default systemd target set in this system?
+
+Ans: run: sudo systemctl get-default
+
+graphical.target
+
+3. Now, change the target to multi-user.target
+
+Ans: run: sudo systemctl set-default multi-user.target
+
+
+Created symlink /etc/systemd/system/default.target -> /lib/systemd/system/multi-user.target.
+
+4. What type of file is firefox.deb located at /root?
+
+Ans: run : sudo file /root/firefox.deb
+
+
+/root/firefox.deb: Debian binary package (format 2.0)
+
+5. What type of file is sample_script.sh located at /root?
+
+
+Ans: run: sudo file /root/sample_script.sh
+
+
+/root/sample_script.sh: Bourne-Again shell script, ASCII text executable
+
+6. You are asked to install a new third-party IDE (integrated development environment ) in the system.
+
+
+Which directory is the recommended choice for the installation?
+
+Ans : /opt
+
+7. Which directory contains the files related to the block devices that can be seen when running the lsblk command?
+
+
+Ans : Block Device or Device Node files are located under /dev directory
+
+/dev
+
+8. What is the name of the vendor for the Ethernet Controller used in this system?
+
+
+Ans : Use: sudo lshw and lookup the vendor for Ethernet Controller under the network section.
+
+
+
+
+
+
+

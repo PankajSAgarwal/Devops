@@ -1,0 +1,35 @@
+1. BIOS POST > Boot loader(GRUB2) > kernel initialization > INIT PROCESS(systemd)
+2. Initate a linux boot process 
+a. start a linux device which is halted or stopped 
+OR
+b. reboot or reset a running system.
+
+3. BIOS POST 
+- POST - Power On Self Test
+- In this stage BIOS runs a post test to ensure that the hardware components attached to the device are functioning correctly .
+- If POST fails , computer may not be operable and the system will not proceed to the second stage of the boot process.
+
+4. BOOT LOADER 
+
+- After a successful POST test , the BIOS loads and executes the boot code from the boot device which is located in the first sector of the hard disk.
+In linux this is located in the /boot File System. 
+
+- the boot loader provides the user with the boot screen often with multiple options to boot into such as Microsoft Windows or Ubuntu 18.04 OS ina n example fo dual boot system.
+
+- once selected , the boot loader loads the kernel into the memory, supplies it with some parameters and hands over the control to the kernel.
+
+- A popular example of the boot loader is GRUB2 which stands for Grand Unified Boot loader version 2.It is now the most primary boot loader for most Linux distributions.
+
+5. Kernel initialization
+
+- The kernel carries out tasks such as initializating hardware and memory management tasks among other things.Once it is completely operational, the kernel looks for an init process to run, which sets up the user space and the processes needed for the user environment
+
+6. Init Process(systemd)
+- In most of the current day linux distributions , the init function then calls the systemd daemon. the systemd is responsible for bringing the linux host to a usable state.
+- systemd is responsible for mounting the filesystem, starting and managing system services.
+- systemd is currently universally standard , but not too long ago another initialization process call System V init(also call SysV) was used. E.g RHEL 6 and CentOS 6 used Sysv initialization
+- key advantage of systemd over SysV is that it reduces system startup time by paralelizing the startup of services
+
+7. to check the init system used , run  the below command
+
+[~] $ ls -l /sbin/init

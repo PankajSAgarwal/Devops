@@ -1,0 +1,62 @@
+1. dmesg - a tool used to display messages from an area of kernel called the ring buffer.
+
+ <i>syntax :</i>
+
+ [~] $ dmesg
+
+ [~] $ dmesg | gerp -i usb
+
+ 2. udevadm info - queries the udev database for device information
+ syntax:
+[~] $ udevadm info --query=path --name=/dev/sda5
+
+3. udevadm monitor - listens to the kernel uevents, upon detecting an event , it prints the details,such as the device path and the device name on teh screen.
+Quite handy to determine the details of a newly attached or removed device. 
+
+syntax:
+[~] $ udevadm monitor
+
+4. lspci - lists information about all PCI devices that are configured in the system. 
+
+e.g PCI devices are ethernet cards , raid controllers,video cards and wireless adapters that are directly attached to PCI slots in the motherboard of the computer.
+PCI - peripheral component interconnect
+
+syntax:
+[~] $ lspci
+
+5. lsblk - list information about block devices
+[~] $ lsblk
+
+Major Number            Device type
+
+1                         RAM
+3                       HARD DISK or CD ROM
+6                       Parallel printers
+8                       SCSI DISK
+
+6. lscpu - to display information about cpu architecture 
+<b> Total number of virtual CPUs  = Sockets * Cores * Threads</b>
+i.e if socket =1 , cores per socket = 4 and threads per core = 2 , 
+total no of cpus = 1*4*2 = 8
+
+so such a system will be able to run 8 parallel threads.
+
+7.lsmem - can be used to list the available memory in the system.
+
+[~] $ lsmem --summary
+
+8. free - command to see total vs used memory in the system
+<i>syntax</i>
+[~] $ free -m
+
+-m - to display memory usage in MB.
+-k - to display memory usage in KB.
+-g - to display memory usage in GB.
+
+9. lshw - a tool extract detailed information on teh entire hardware configuration of the machine.it can report exact memory configuration , firmware version and mainboard configuration,CPU version and speed , cache configuration, bus speed etc.
+
+[~] $ lshw
+
+
+
+

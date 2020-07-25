@@ -1,0 +1,32 @@
+1. to see the operation mode set in the system
+[~] $ runlevel
+
+2. Systemd Target(Runlevels)
+
+- Runlevel                    Function
+   5                Boots into a graphical interface
+   3                Boots into a command-line interface
+3. During boot the init process checks the runlevel
+4. In systemd , runlevels are called targets.
+
+- Runlevel        Systemd Targets            Function
+    5           graphical.target        Boots into a Graphical interface
+    3           multiuser.target        Boots into a command line interface
+5. To see the default target
+
+[~] $ systemctl get-default // o/p graphical.target
+
+- This command looks up at file located in /etc/systemd/system/default.target
+
+ls -ltr /etc/systemd/system/default.target
+/etc/systemd/system/default.target -> /lib/systemd/system/graphical.target
+
+6. To change the default target 
+// here we are changing the runlevel graphical to multi-user
+[~] $ systemctl set-default multi-user.target 
+
+output:
+
+Created symlink /etc/systemd/system/default.target -> /lib/systemd/system/multi-user.target
+
+
