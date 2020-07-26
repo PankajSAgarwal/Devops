@@ -1,0 +1,39 @@
+1. Which of the following package managers would you use on a debian based distro?
+
+Ans Debain distros use dpkg. 
+
+2. The package for firefox browser has been downloaded at /root/firefox.deb.
+
+
+Try to install it using sudo dpkg -i
+
+sudo dpkg -i /root/firefox.deb
+
+The above command might fail as dpkg doesnt automatically check for dependencies.
+
+So Let's use apt to install it firefox.
+
+sudo apt install firefox
+
+3. Lets now locate the package to install Chromium browser in the system.
+
+
+Use apt search functionality to locate the correct package name.
+The browser has the description of: Chromium web browser, open-source version of Chrome
+What is the correct package name?
+
+Ans : apt search Chromium
+
+4. Install the Chromium browser using apt
+
+sudo apt install -y chromium-browser
+
+5. Finally, remove the firefox browser from the system.
+
+sudo apt remove firefox
+
+
+
+
+
+

@@ -1,0 +1,40 @@
+1. Package Managers
+
+DPKG/APT - Debian based system
+RPM - for Redhat and centos
+
+2. One of the to differentiate different distributions of linux is through package manager
+
+- distributions like redhat,centos and fedora are based on rpm package manager and hence they are known as RPM based distributions
+
+- The debian family including ubuntu,Debian,Arch Linux ,Linux Mint etc make use of debian package managers such as DPKG
+
+3. What is a package ?
+- A package , in its simplest definition is a compressed archive that contains all the files that are required by our particular software to run.
+
+e.g lets install GIMP(an image editing software which stands for GNU Image Manipulation Program).
+
+To do this can make use of gimp.deb package. This gimp.deb package contains all the software binaries and files needed for image editor to run along with metadata , which provides information about the software itself.
+
+4. A package manager is a software in a Linux system that provides a consistent and automated process of installing, upgrading and configuring and removing packages from the operating system. 
+
+5. Functions of package manager 
+- Package integrity and Authenticity
+
+ • Some of the essential functions of a package manager are ensuring the integrity and authenticity of the package by verifying their digital certificates and checksums.This is to ensure that the package is downloaded from a trusted source and safe to install.
+
+- Simplified Package Management
+
+• Simplifying the entire package management process. Most package managers provide powerful querying options making it easier to lookup packages and then downloading , installing or updating existing software from a software repository.
+
+- Grouping packages by function to reduce user confusion
+
+- Manage dependencies to ensure a package is installed with all packages it requires, this avoiding what is commonly called as dependency hell.
+
+6. Different types of package managers 
+- DPKG - package manager for debian based distributions
+- APT - a newer front end for the dpkg system found in debian based distributions
+- APT-GET - traditional front end for dpkg system
+- RPM - base package manager found in redhat based distributions
+- YUM - a front end for RPM system found in redhat based distributions
+- DNF - a more feature rich front end for RPM system found in redhat based distributions

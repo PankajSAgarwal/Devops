@@ -1,0 +1,29 @@
+1. Use an rpm command and find out the exact package name for wget installed in this server (centos-lab)
+
+Ans: Run: rpm -qa | grep wget
+
+2. The package for firefox browser has been downloaded under /home/bob in centos-lab server.
+
+Try to install it using RPM
+
+Ans : Run: sudo rpm -ivh /home/bob/firefox-68.6.0-1.el7.centos.x86_64.rpm
+
+installing with rpm has a possibility of failure due to missing dependencies .
+
+So let us install with yum
+
+ sudo yum install firefox -y
+
+ 3. How many software repositories are configured for YUM in this system?
+
+ Ans : Run: sudo yum repolist and count the number of repos
+
+ 4. Which package provides the tcpdump command?
+
+
+Ans : Run: sudo yum provides tcpdump
+
+
+
+
+

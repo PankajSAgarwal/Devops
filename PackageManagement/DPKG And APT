@@ -1,0 +1,70 @@
+1. DPKG works with debian based distros
+
+2. DPKG can be used to 
+
+- install/upgrade
+- uninstall
+- list
+- status
+- Verifying
+
+3. The package extension is .deb
+
+4. To install or update an existing package 
+
+dpkg -i telnet.deb
+
+5. to uninstall
+
+dpkg -r telnet.deb
+
+6. to list packages installed in the system along with the version number
+
+dpkg -l telnet.deb
+
+7. use the -s option to check the status of the package if it is installed in the system.
+
+dpkg -s telnet
+
+8. to display details of the package such as version number, maintainer etc.
+
+dpkg -p <<path to file>>
+
+9. apt - stands for advance package manager is more user friendly and overall a better tool compared to apt-get
+
+10. apt acts as a front end package manager that relies on the dpkg utility quite similar to the relation between yum and rpm . Similar to yum apt relies on a software repository that contains packages
+
+11. The software repository for apt is defined in the /etc/apt/sources.list file
+
+12. to refresh the repository
+
+apt update
+
+13. To install available upgrades of all packages currently installed on the system from the sources configured 
+
+apt upgrade
+
+14. You can also update the repositories using the apt edit sources command 
+
+apt edit-sources
+
+this opens up the /etc/apt/sources.list file in the text editor of your choice like vim or nano
+
+15. Another way to add more repositories, update the sources.list file directly using a text editor such as vi editor
+
+16. To install package
+
+[~] apt install telnet
+
+17. to remove package
+
+[~] apt remove telnet
+
+18. To look for a package in a repository
+
+apt search telnet
+
+19. list all available packages
+
+apt list | grep telnet
+

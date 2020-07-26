@@ -1,0 +1,14 @@
+1. APT better than APT-GET
+2. In most new debian system , APT is installed by default
+3. apt install firefox 
+
+provides just enough output in a user friendly format
+
+apt-get install firfox
+
+provides a verbose output and not in a user friendly format
+
+4. you can search for a package using apt , but u cannot search for a package using apt-get. You have to use another tool called apt-cache.
+
+[~] apt search telnet
+[~] apt-cache search telnet // used with apt-get

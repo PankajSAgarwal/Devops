@@ -1,0 +1,89 @@
+1. RPM - Red Hat Package Manager
+
+e.g Redhat,CentOS,Fedora etc.
+
+2. File extensions for packages managed by RPM is .rpm .
+
+3. Five basic modes of operations of RPM are :
+
+- Installing
+- Uninstalling
+- Upgrade
+- Query
+- Verifying
+
+4. To install a package
+
+rpm -ivh <<package name>>
+
+e.g rpm -ivh telnet.rpm
+
+5. To uninstall a package
+
+rpm -e telnet.rpm
+
+6. To upgrade an existing package
+
+rpm -Uvh telnet.rpm
+
+7. The RPM database stores information about all rpm packages installed in your system.
+It is stored in the /war/lib/rpm directory
+
+It is used to query what packages are installed, what version each package is, and any changes to any files in the package since installation.
+
+8. to query the rpm database to get details about an installed package
+
+rpm -q telnet.rpm
+
+9. Verifying a package
+
+rpm -Vf <<path to file>>
+
+10. It is important to note that RPM does not resolve package dependencies on its own.This is why we make a higher level package manager called YUM.
+
+11. YUM - Yellowdog,Updater ,Modfied and it is a free and open source package manager
+
+• RPM based distros
+• YUM works with software repositories which are essentially a collection of packages and provide package and dependency management
+The repository information is stored in /etc/yum.repos.d and the repository files have a .repo extension.
+• YUM acts as a high level package manager but under the hood it still relies on RPM to manage packages on Linux system.
+• Unlike RPM , YUM handles package dependencies very well.
+
+12. for redhat system with redhat subscription, the official redhat managed software repository is located at
+
+/etc/yum.repos.d/redhat.repo
+
+you can add a new repo in case you dont want to make use of official repo
+
+/etc/yum.repos.d/nginx.repo
+
+13. sequence of steps involved while installing the package
+
+e.g yum install httpd
+
+- Yum first runs a transaction check
+- If the package is not installed in the system, yum checks the configured repository under the repos.d directory for the availability of the requested package. It also checks if any of the dependent packages are already installed in the system, or if it needs to be upgraded.
+
+14. To show  all the repos added to your system, 
+
+yum repolist
+
+15. If you want to check which package should be installed for a specific command to work 
+
+yum provides <<command name>>
+
+e.g yum provides scp
+
+16. to remove a installed package
+
+yum remove httpd
+
+17. To update an existing package
+
+yum update <<package name>>
+e.g yum update telnet
+
+
+
+
+
