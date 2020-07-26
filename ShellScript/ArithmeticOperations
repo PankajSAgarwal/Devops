@@ -1,0 +1,62 @@
+1. expr
+
+e.g expr 6 + 3  // note operator and values are strictly seperated by space
+
+9
+
+e.g expr 6 - 3
+
+3
+
+e.g expr 6 / 3
+
+2
+
+e.g expr 6 \* 3
+
+18
+
+Note : for multplication * needs to be escaped with \ because * is a reserved character in shell and means everything
+2. expr with variable substitution
+
+$ A=6
+$ B=3
+
+expr $A + $B
+expr $A - $B
+expr $A / $B
+expr $A \* $B
+
+3. Another way to perform arithmetic operations in basj is to use double parantheses
+
+$ echo $(( A + B ))
+9
+$ echo $(( A-B )) // no longer need strictly space between varaiables and operator
+3
+$ echo $(( A/B ))
+2
+$echo $(( A * B ))
+18
+
+$ echo $(( ++A ))
+$ echo $(( --A ))
+$ echo $(( A++ ))
+$ echo $(( A-- ))
+
+4. Both expr and double parantheses return decimal value . They do not support floating point values.
+
+e.g 
+
+$ A=10
+$ B=3
+
+expr $A / $B                  // output 3
+echo $((A/B))                 // output 3
+
+5. bc - basic calculator utility in linux
+
+use bc -l to generate floating point result
+
+e.g
+
+echo $A / $B | bc -l        // output 3.333333

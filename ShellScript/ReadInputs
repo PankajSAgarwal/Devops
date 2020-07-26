@@ -1,0 +1,4 @@
+1. use the read command followed by the variable name into which the value is to be stored.
+
+• read mission_name
+• read -p "Enter mission name :" mission_name

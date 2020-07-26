@@ -1,0 +1,26 @@
+1. A variable always have a $ sign before its name.
+
+2. A variable name may consists only of alphanumeric pr underscores. 
+mission_name is ok for variable name but mission-name is not ok as variable name.
+
+3. variable names are case-sensitive
+
+4. You can use the variable name to store the result of a command also.
+
+5. rocket_status=$(rocket-status $mission_name)
+echo "Status of launch : $rocket_status"
+
+6. Best Practices for variable names
+" Varaiable names should be in lower case with underscores to sperate words.
+mission_name=mars-mission
+mkdir $mission_name
+
+rocket-add $mission_name
+rocket-start-power $mission_name
+
+rocket-internal-power $mission_name
+rocket-start-sequence $mission_name
+rocket-start-engine $mission_name
+rocket-lift-off $mission_name
+
+rocket-status $mission_name

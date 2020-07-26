@@ -1,0 +1,8 @@
+1. ## script to create a backup file
+
+file_name="create-and-launch-rocket"
+cp $file_name ${file_name}_bkp
+
+2. echo "My name is $USER"
+
+This script uses the environment variable $USER
