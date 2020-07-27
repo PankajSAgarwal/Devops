@@ -1,0 +1,68 @@
+1. Check the size of the file use command du(disk usage)
+
+[~] du -sk test.img         //sk option shows the size of the file in kilobytes
+
+2. du -sh test.img         // prints the file in a human readable format
+
+3. ls -lh can also be used to show file size
+
+ls -lh test.img 
+
+4. tar is used to group multiple files or directories into a single file . Hence it is especially useful for archiving data.
+
+tar -cf test.tar file1 file2 file3  // c- create an archive , f- specify the name of the tar file to be created
+
+ls -ltr test.tar
+
+5. tar - tape Archive
+
+• Files created with tar are often called tarballs.
+
+6. To see the contents of the tar ball
+
+tar -tf test.tar
+
+7. To extract the contents of tar ball
+
+tar -xf test.tar
+
+8. use z flag to compress the tar ball to reduce its size.
+
+tar -zcf test.tar file1 file2 file3
+
+9. compressing the file using bzip2 , gzip and xz
+
+- bzip2 test.img
+  du -sh test.img.bz2
+
+- gzip test1.img
+  du -sh test1.img.gz
+
+- xz test2.img
+
+du -sh test2.img.xz
+
+10. to uncompress the file bunzip2 , gunzip,unxz
+
+- bunzip2 test.img.bz2
+
+  du -sh test.img
+
+- gunzip test1.img.gz
+
+  du -sh test1.img
+
+- unxz test2.img.xz
+
+  du -sh test2.img.xz
+
+11. To read compressed files without uncompressing them,
+
+zcat/bzcat/xzcat
+
+e.g zcat hostfile.txt.bz2
+
+
+
+
+

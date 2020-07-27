@@ -1,0 +1,79 @@
+1. There are 3 data streams created when you launch a Linux command .
+
+• Standard input - Stdin is the standard input string . This accepts text as its input.
+e.g cat sample_text.txt
+
+• Standard output - 
+
+cat sample_text.txt
+
+This is the file contents .          ## This is delivered via std out
+
+• Standard error - Error messages from the command are sent through the standard error stream, with IO redirection.
+
+e.g cat: sample_text.txt: No such file or directory
+
+2. The standard input,output and error can be redirected to text files.
+
+3. to redirect standard output to a file instead of printing it
+
+• [~] $ echo $SHELL > shell.txt   ## this will overwrite the contents in the file
+
+• [~] $ echo $SHELL >> shell.txt ## append stdout to an existing file
+
+4. redirect Stderr
+
+• [~] $ cat missing_file 2> error.txt ## if the file error.txt is not present it will be created otherwise the file will be overwritten
+
+• [~] $ cat missing_file 2>> shell.txt   ## this will append std err to shell.txt
+
+5. /dev/null - referred as bit bucket , a place where you dump anything ypu don't need
+
+If you want your command to execute and not print the error messages on the screen,even if it generates a standard error, you can redirect to /dev/null
+
+• [~] $ cat missing_file 2> /dev/null
+
+6. Command line pipes
+
+pipes allow the first command standard out to be used as the standard input for the second command
+
+e.g
+[~] $ cat sample.txt
+
+  Hello there!
+    Nice to see you here!
+
+[~] $ grep Hello sample.txt > file.txt
+
+[~] $ less file.txt
+
+Above two commands can be combined using command line pipes
+
+[~] $ grep Hello sample.txt | less 
+
+Hello there!
+  (END)
+
+7. tee - it is a useful command to work with standard input and output
+
+• [~] $ echo $SHELL | tee shell.txt   ## tee commands prints the output to console and also overwrites the content in the file
+
+/bin/bash
+
+[~] $ cat shell.txt
+
+/bin/bash
+
+• [~] $ echo "This is the bash shell" | tee -a shell.txt ## use tee -a to append the content to an existing file instead of overwriting.
+
+  This is the bash shell
+
+[~] $ cat shell.txt
+/bin/bash
+This is the bash shell
+
+
+
+
+
+

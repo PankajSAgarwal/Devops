@@ -1,0 +1,37 @@
+1. 3 modes of vi
+
+- Command mode
+- Inserter mode
+- Last Line mode
+
+2. • from command to insert mode , press O or A or I or i or a or o
+• from insert mode to command mode , press esc
+• from command mode to last line mode , press colon(:)
+
+3. Command mode
+
+- Move around
+• Use directional keys
+• Alternatively, use K to move up , J to move down , h to move left and l to move right
+• Copy a line , use yy
+• to paste the copied line , move the cursor above the line where u want to paste , and press the P key.
+• save the file , upper case ZZ
+• to delete a letter , X
+• to delete a line , move the cursor to any position in the line and press dd
+• to delete 3 lines from the current line , issue the command d3d .
+• to undo a previous change type u
+• to redo the change again press the r key
+• find a key  /line or ?line
+Find Next occurrence - n
+Find previous occurrence - N
+
+4. last line mode
+
+• Save - :w
+• quit - :q
+• Save and Quit - :wq
+• quit without cofirmation - :q!
+
+5. vi vs vim
+
+open a file with vim and then type in :hvi-differences
