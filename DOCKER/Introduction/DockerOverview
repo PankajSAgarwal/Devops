@@ -19,4 +19,13 @@
 
 5. Containers vs Virtual Machine
 
+- VMs use more resource utilization,occupy more memory and take more time to boot up compared to containers
+- Docker has less isolation as more resources are shared between the containers like linux kernel whereas VMs have complete isolation as they dont rely on unerlyin OS.
+
+6. Public Docker registry is called Docker hub.
+
+7. Docker Image vs Docker Container
+
+- An Image is a package or template . Image is used to create one or more containers
+- Containers are running instances of images that are isolated and have their own environments and set of processes 
 

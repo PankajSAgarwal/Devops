@@ -1,0 +1,25 @@
+1. docs.docker.com
+2. To view the version of ubuntu
+
+cat /etc/*release*
+
+3. Uninstall any older version of Docker from Ubuntu system
+$ sudo apt-get remove docker docker-engine docker.io containerd runc
+
+4. Set up repository and install the software
+
+• Using the convinience script
+
+$ curl -fsSL https://get.docker.com -o get-docker.sh // downloads the script docker.sh
+$ sudo sh get-docker.sh
+
+5. check the version of docker
+
+$ sudo docker version
+
+6. Install a simple container to see if docker is set up correctly
+
+• https://hub.docker.com/
+• pickup container command for whalesay
+
+sudo docker run docker/whalesay cowsay Hello-World!
