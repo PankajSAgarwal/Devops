@@ -1,0 +1,73 @@
+1. Which port number does the SSH service use by default?
+
+SSH makes use of port 22.
+You can also validate this by running netstat -ntlp | grep ssh on a server running SSH service.
+We learn more about netstat in the upcoming section.
+
+2. If you run ssh devapp01 in the terminal, which user are you using to connect to the server?
+
+
+If unsure, try it out on the terminal.
+
+If no user is specified with the ssh command, the connection will be attempted with the logged-in user which is bob
+
+
+3. First, generate the SSH key-pair using the ssh-keygen command.
+
+Key Type RSA
+
+ssh-keygen -t rsa   // dont use sudo as the key gen is for user bob
+
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/bob/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/bob/.ssh/id_rsa.
+Your public key has been saved in /home/bob/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:LdSmcpep5ooKlkkuniA4z+OmzO/lZMjk/jRuxZT21K4 bob@caleston-lp10
+The key's randomart image is:
++---[RSA 2048]----+
+|                 |
+|         .       |
+|        o +      |
+|       = = +     |
+| . .  = S *      |
+|+ * .  = = .     |
+|B= + *. o .      |
+|O== Bo.o E       |
+|.OB*++...        |
++----[SHA256]-----+
+
+4. The public key created using the previous command is:
+
+SSH keys are created under .ssh directory under the home directory.
+The public key has an extension of .pub
+
+/home/bob/.ssh/id_rsa.pub
+
+5. Copy the public key to target server devapp01.
+
+
+Make use of ssh-copy-id
+
+run: ssh-copy-id bob@devapp01
+Enter the password when prompted.
+
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/bob/.ssh/id_rsa.pub"
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+
+6. Which file on the target server is the public key copied in to?
+
+
+The public key is added to the authorized_keys file under /home/bob/.ssh directory
+
+
+7. Finally, copy the file /home/bob/caleston-code.tar.gz from Bob's laptop to the server devapp01
+
+Copy the file to Bob's home directory.
+
+run: scp /home/bob/caleston-code.tar.gz devapp01:/home/bob
+
+

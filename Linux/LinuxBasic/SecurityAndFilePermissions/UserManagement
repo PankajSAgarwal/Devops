@@ -1,0 +1,46 @@
+1.  // create a new user
+
+[~] $ useradd bob
+
+2. check whther the user got created.
+
+[~] $ grep -i bob /etc/passwd
+o/p : bob:x:1002:1002::/home/bob:/bin/sh
+
+[~] $ grep -i bpb /etc/shadow
+o/p: bob:!:18341:0:99999:7:::
+
+3. Create passowrd for bob
+
+passwd bob
+
+4. [~]$ useradd -u 1099 -g 1009 -d /home/robert -s /bin/bash -c "Mercury Project member" bob
+
+-c Custom Comments
+-d custom home directory
+-e Expiry date
+-g specific GID
+-G create user with multiple secondary groups
+-s specify login shells
+-u specific UID
+
+5 . [~]$ id bob
+uid=1009(bob) gid:1009(avenger) groups=1009(avenger)
+
+6. grep -i bob /etc/passwd
+bob:x:1009:Robert Downey Jr,Avenger:/home/bob:/bin/bash
+
+7. delete a user
+
+[~]$ userdel bob
+
+8. add a user to group
+
+[~]$ groupadd -g 1011 developer
+
+9. delete a group
+
+groupdel developer
+
+
+

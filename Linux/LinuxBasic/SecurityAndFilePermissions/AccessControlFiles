@@ -1,0 +1,44 @@
+1. Most of the access control files in linux are stored in /etc directory.
+2. /etc directory can be read by any user by default but can be modified only by root user only
+3. /etc/passwd
+
+[~]$ grep -i ^bob /etc/passwd
+
+/bob:x:1001:1001::/home/bob:/bin/bash
+
+- format of the content of th file
+
+USERNAME:PASSWORD:UID:GID:GECOS:HOMEDIR:SHELL:
+
+• USERNAME,UID,GID are mandatory
+• Password is x as it is stored in another file /etc/shadow
+• GECOS : optional and kind of csv format
+
+- contains basic information about user like user name , uid ,gid, home directory and the default shell.
+
+- This file does not save any password. Password are stored in another file called 
+/etc/shadow
+
+4. /etc/shadow
+
+[~]$ grep -i ^bob /etc/shadow
+
+- format of the contents of this file
+
+USERNAME:PASSWORD:LASTCHANGE:MINAGE:MAXAGE:WARN:INACTIVE:EXPDATE
+
+- the contents of this file are hashed .
+
+5. /etc/group
+
+[~]$ grep -i ^bob /etc/group
+
+developer:x:1001:bob,michael
+
+- format of the content of the file
+NAME:PASSWORD:GID:MEMBERS
+
+e.g developer:x:1001:bob,sara
+
+• members can be comma separated
+- stores information about all user groups in the system sucj as the group name and gid and members

@@ -1,0 +1,48 @@
+1. SSH - used to login and execute commands on a remote computer.
+
+• ssh <hostname or IP Address>
+• ssh <user>@<hostname or IP Address>
+• ssh -l <user> <hostname or IP Address>
+
+- remote server should have ssh services running on port 22
+
+- password-less ssh
+
+• first generate key pair on the client
+
+key pair = Private key + Public key
+
+- private key is the key only you as the client will have and is not shared with anyone else.
+
+- Public key can be shared with others including our remote server.
+
+• when the public key is installed on the remote server, u can unlock it by connecting to it with a client that alreay has the private key.
+
+- Set up password-less keys
+
+• create key pair on the client using ssh-keygen command
+
+ssh-keygen -t rsa
+
+public key is stored at /home/bob/.ssh/id_rsa.pub
+
+private key is stored at /home/bob/.ssh/id_rsa
+
+• Next step is to copy the public key to the remote server
+Make use of ssh-copy-id command
+
+[~]$ ssh-copy-id bob@devapp01
+
+• So now public key of the client is copied to remote server devapp01
+
+these keys are installed in a specific file called authorized_keys on remote server at below location
+
+/home/bob/.ssh/authorized_keys
+
+2. SCP - allows you to copy data over ssh
+
+scp /home/bob/caleston-code.tar.gz devapp01:/home/bob
+
+• to copy the directories instead of files use -r and preserve the ownership and permission of the source file use -p flag
+
+scp -pr /home/bob/media/ devapp01:/home/bob

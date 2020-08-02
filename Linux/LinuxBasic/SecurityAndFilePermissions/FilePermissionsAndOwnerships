@@ -1,0 +1,89 @@
+1. [~]$ ls -l bash-script.sh
+
+-rwxrwxr-x 1 bob 89 Mar 17 01:35 bash-script.sh
+ ---
+ owner
+ (u)
+
+• File Type                                     Identifier
+
+Directory                                           d
+REGULAR FILE                                        -
+CHARACTER DEVICE                                    c
+LINK                                                l
+SOCKET FILE                                         s
+NAMED PIPE                                          p
+BLOCK DEVICE                                        b
+
+2. File Permisions
+
+Bit                        Purpose                       Octal Value
+
+r                           read                              4
+w                           write                             2
+x                           execute                           1
+
+3. Directory Permisions
+
+Bit                         Purpose                       Octal Value
+r                           read                              4
+w                           write                             2
+x                           execute                           1
+-                           No permission                     0
+
+4. ls -ld /home/bob/random_dir
+
+d--xrwxrwx 1 bob bob 89 Mar 17 01:35 .
+
+[~]$ whoami
+
+bob
+
+[~]$ ls /home/bob/random_dir
+
+ls:cannot open directory 'random_dir' : Permission denied
+
+[~]$ cd /home/bob/random_dir
+
+[bob@ubuntu-server random_dir]$
+
+** Since execute bit is set for onwer bob he can cd to the directory but he cannot list the content as read and write bit are not set on the directory for bob.
+
+*** But bob is part of the group bob which has all access to the directory, then why is not bob still list the content of the directory?
+
+- Linux access are sequential . Linux system checks bob is a user and owner of the directory and since read/write bits are not set on directory for owner bob , system denies bob access and ignores rest of the access checks.
+
+5. linux file permissions
+
+• rwx - 4+2+1 =7
+• rw- - 4+2+0 =6
+• -wx - 0+2+1 = 3
+• r-x = 4+0+1 = 5
+
+6. Modify file permissions
+
+- chmod <permissions> file
+- chmod symbolic mode as below
+
+• chmod u+rwx  test-file   -- provide full access to owners
+• chmod ugo+r-x test-file  -- provide read access to owners,groups and others.Remove execute access
+• chmod o-rwx test-file    -- remove all access for others
+• chmod u+rwx,g+r-x,o-rwx test-file --Full access for owner ,add read, remove execute for group and no access for others .
+
+- same chmod operations can be done in numeric mode as well
+
+• chmod 777 test-file     -- provide full access to owners,group and others
+• chmod 555 test-file     -- provide read and execute access for owner,group and others
+• chmod 660 test-file     -- provide read and write access for owner and group, no access for others.
+• chmod 750 test-file -- Full access for owner , read and execute for group and no access for others
+
+7. Change ownership and group
+
+- chown owner:group file
+
+• chown bob:developer test-file -- changes owner to bob and group to developer
+• chown bob androi.apk -- changes just the owner of the file to bob .Group unchanged.
+
+- chgrp
+
+• chgrp android test-file -- changes the group for the test-file to the group called android.

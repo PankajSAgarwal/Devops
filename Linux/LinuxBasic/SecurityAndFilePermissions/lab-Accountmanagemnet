@@ -1,0 +1,53 @@
+1. What type of account does Bob use?
+
+Bob falls in to the category of a user. Hence, the most appropriate answer is User Account
+
+2. Which of the following commands will show you the UID for a user?
+
+id
+
+3. What is the UID for bob
+
+id bob
+
+4. What level of sudo access does bob have in this system?
+
+run: sudo grep bob /etc/sudoers. Bob has ALL permissions (4th field)
+
+bob ALL=(ALL) ALL
+
+5. Which access control file has the encryped password for the users?
+
+/etc/shadow
+
+6. A user called chris has been created.
+Can you find out his Full Name?
+
+inspect the password file: sudo grep chris /etc/passwd
+
+
+7. Which groups is chris part of?
+
+Run: id chris
+
+8. What is chris's primary group?
+
+from the "id chris" command, find the group associated with the GID
+
+9. Now, lets create a new user called sarah. Once done, set her password to caleston321
+
+run: sudo useradd sarah
+and then sudo passwd sarah to change the password
+
+10.Create a group called john with the GID 1010. Next create another user called john with UID = 1010, primary group = john and login shell = /bin/sh
+
+run: sudo groupadd -g 1010 john
+sudo useradd -u 1010 -g 1010 -s /bin/sh john
+
+
+
+
+
+
+
+

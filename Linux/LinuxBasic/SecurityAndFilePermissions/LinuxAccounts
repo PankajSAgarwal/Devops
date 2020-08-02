@@ -1,0 +1,54 @@
+1. Linux Security
+• Access controls -  This method make use of user and password-based authentication to determine who can access the system.
+• PAM - Pluggable Authentication Mode - Another way of managing Authentication in Linux.
+It is normally used to authenticate users to programs and services in Linux.
+• Network Security - Network Security is used to restrict or allow access to services listening on the linux server.While we commonly rely on external firewall to do this,it can also be set up within the linux system by making use of tools like IPTables and Firewalld.
+
+• SSH Hardening - stands for secure shell and it is used for remote access to a server over an unsecured network.SSH hardening can help make sure only the authorized users gain access to the server.
+
+• SELinux makes use of security policies for isolating applications running on the same system from each other to protect the Linux server.
+
+2. What is a user account ?
+
+User account maintains information like user name and password used to log in to the system.Besides this, a user account also contains an identifier called UID which is unique for each user in the system.
+
+3. the information about user account is stored in /etc/passwd file.
+
+4. A linux group is a collection of users.It is used to organize users based on common attributes such as role or a function. The information about group is stored in 
+/etc/group file.Each grop has a unique identifier called GID.
+
+5. user information includes username,UID,GID,HomeDirectory,Default shell
+
+command to check user information
+
+[~] $ id michael
+o/p : udi=1001(michael) gid=1001(michael)groups=1001(michael),1003(developers)
+
+6. To check the home directory path and default shell assigned to the user,
+we can inspect /etc/passwd file.
+
+grep -i michael /etc/passwd file
+o/p: michael:x:1001:1001::/home/mcichael:/bin/sh
+
+7. root is a super user account with UID = 0
+8. System accounts are usually created during OS installation. These are for use by software and services that will not run as the super user .
+
+e.g ssh and mail
+
+•UIDs for system accounts are usually < 100 or between 500 and 1000.
+• They usually don't have dedicated home directory.
+• If they do home directory is not created usually under /home
+9. Service accounts are similar to system accounts and are created when services are installed in Linux.
+
+• An nginx service make use of service account called as nginx
+• mercury 
+
+10 . Commands
+
+• [~]$ id
+o/p : uid=1000(michael) gid=1000(michael) groups=1000(michael)
+
+• [~]$ who
+
+users currently logged in the system.
+
