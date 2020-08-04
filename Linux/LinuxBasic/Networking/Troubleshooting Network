@@ -1,0 +1,35 @@
+1. Check interfaces . it coud be an issue with your local interface not being connected to the network.or it could be your host not resolving the ip address to the hostname you were trying to connect to or it could be an issue with the route to the server or it could be an issue with the server itself. May be the server itself has connectivity issues or the software that hosts the server isn't functioning correctly.
+
+2. troubleshooting techniques
+
+a) Start with host ip connectivity
+
+• Check the local interfaces by running the ip link command and ensure the primary interface is up.
+
+-[~]$ ip link
+
+• Check DNS resolution if we can resolve host name to ip address.
+Run a nslooup command against the host name and make sure it is resolving to valid ip.
+
+[~]$ nslookup caleston-repo-01
+
+nslookup reaches out to DNS server and request the ip address for the hostname
+
+• Check Connectivity
+
+try to ping the remote server
+
+[~]$ ping caleston-repo-01
+
+*** Ping is not the best tool to check connectivity as many network disable ping
+
+• Check route 
+ to troubleshoot issue between the route from your system to remote system , run traceroute command . This will show us number of hops or devices between the source and destination. It will also show if there is a problem with any of the devices in the network route between the source and destination. 
+
+[~]$ traceroute 192.168.2.5
+
+• Check if http process is running on port 80
+
+The netstat command can be used to print the information of the network connections, routing table and several other network statistics.
+
+[~]$ netstat -an | grep 80 | grep -i LISTEN

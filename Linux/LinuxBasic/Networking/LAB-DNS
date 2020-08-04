@@ -1,0 +1,45 @@
+1. What is the IP address of the site www.facebook.com?
+
+Use ping to test
+
+Ans: nslookup www.facebook.com
+
+2. What is the IP address of the DNS Server used in this system?
+run: cat /etc/resolv.conf and look at the server's IP address
+
+3. Which file is responsible for host file-based DNS resolution?
+
+/etc/hosts
+
+4.What is the configuration file used for the DNS Server?
+
+/etc/resolv.conf
+
+5. Change the DNS Server to google's DNS which is 8.8.8.8
+
+Edit the /etc/resolv.conf file and change the nameserver IP to 8.8.8.8
+
+
+6. Which order is used currently to resolve an IP address in the system?
+
+
+Check the nsswitch.conf file
+
+Run: grep hosts /etc/nsswitch.conf, since the files precede the dns option, it will first check host file
+
+bob@caleston-lp10:~$ grep hosts /etc/nsswitch.conf
+hosts:          files dns
+
+7. Change the order to DNS first and then hosts.
+
+Update /etc/nsswitch.conf and change the line to hosts: dns files
+
+
+8. Which search domain is configured in this system ?
+
+
+Inspect the DNS configuration file.
+
+Ans : check for the search domain in /etc/resolv.conf. It is set to caleston.ca
+
+

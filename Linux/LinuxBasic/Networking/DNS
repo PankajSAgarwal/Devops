@@ -1,0 +1,53 @@
+1. Name resolution - translating a hostname to a ip address .
+
+2. ping might not always be a reliable tool for name resolution . nslookup and dig are some other useful tools for name resolution.
+
+3. DNS - a common server where all the mapping between name and ip address is stored . So all hosts on a network can use the DNS server for name resolution instead of using tehor own /etc/hosts file
+
+4. Every host has a DNS resolution configuration file at /etc/resolv.conf
+
+[~]$ cat /etc/resolv.conf
+
+nameserver 192.168.1.100
+
+5. In case a name server entry is in local host and in DNS server , the system first looks at local host and the DNS . If system find the name server in local host it uses that. However this order can be changed . This order is defined in /etc/nsswitch.conf
+
+[~]$ cat /etc/nsswitch.conf
+
+hosts:        files dns
+
+• order above is first file(refers to host file) and then DNS 
+
+6. Domain names
+
+www.google.com.
+
+. -> Root
+.COM - Top level domain name
+google - Domain name
+www - sub domain name
+
+other sub domains of google.com are mail, drive,maps,apps
+
+e.g google maps services are at subdomain maps.google.com
+
+google storage services are at subdomain drive.google.com
+
+google mobile app services are available at apps.google.com
+
+google email services are available at mail.google.com
+
+7. To resolve domain name by its first name with in an organization
+
+e.g if i want to just search web.mycompany.com by the name web , then i can add the following in /etc/resolv.conf in my local host
+
+[~]$ cat >> /etc/resolv.conf
+
+nameserver 192.168.1.100
+search     mycompany.com  prod.mycompany.com
+
+8. nslookup - query a hostname from a DNS server . nslookup does not consider the entries in the local /etc/hosts file.
+
+[~]$ nslookup www.google.com 
+
+9. DIG - is another useful tool to test DNS name resolution.It returns more details in a similar form as is stored on the server.

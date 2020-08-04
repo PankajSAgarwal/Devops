@@ -1,0 +1,9 @@
+1. A record - IP to host name 
+
+e.g web-server 192.168.1.1
+
+2. AAAA record (also known as quad A records) - IPV6 to host names.
+
+3. CNAME record - mapping one name to another name
+
+e.g food.web-server eat.web-server, hungry.web-server

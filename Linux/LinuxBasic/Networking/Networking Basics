@@ -1,0 +1,96 @@
+1. A system A reaches a system B when they are connected to a switch and the switch creates a network containing the two systems.
+
+A and B can be laptops, desktops,VMs on clouds etc
+
+2. To connect them to a switch , we need a network interface on each host, physical or virtual dependening on the host.
+
+3. To see the interfaces on the host we use the below command
+
+ip link
+
+lets asume the network interface is eth0 on A and B and its a  network with IP address 192.168.1.0,we then assign the system with IP addresses on the same network.
+
+4. To assign an ip address to eth0
+
+ip addr add 192.168.1.10/24 dev eth0  // system A
+ip addr add 192.168.1.11/24 dev eth0  // System B
+
+5. Once the links are up and IP addresses are assigned the computers can now communicate with each other through the switch.
+
+6. The switch can enable communication only within a network.
+
+7. Say we have two networks
+
+Network A - 192.168.1.0  having System A 192.168.1.10 and System B 192.168.1.11
+Network B - 192.168.2.0 having System C 192.168.2.10 and System B 192.168.2.11
+
+How does system A on network A with ip .1.10 reach system C with ip .2.10 on Network B
+
+That is where router comes into picture .
+
+8. Router connects two network together.Since it connects two seperate network, it gets assigned two seperate IPs.For the exmaple in point 7 , for the first network, we assign the router an ip of 192.168.1.1 and for second network an IP of 192.168.2.1
+
+Now we have a router connected to two networks that can enable communication between them.
+
+9. When System B tries to send a packet to system C,how does it know where a router is on the network to send the packet through?
+
+The router is just another device on the network. there could be many other such devices.That's where we configure the systems with a gateway or route.
+
+For anlaogy purpose , if network is a room then gateway is a door to the outside world, to other netwroks or to the internet.The systems need to know where the door is to go through that.
+
+10. To see the existing routing configuration in a system , run the route command
+
+[~]$ route
+
+11. In linux, to configure the gateway on System B to reach the systems on network 2.0,run the ip route add command
+
+[~]$ ip route add 192.168.2.0/24 via 192.168.1.1
+
+Re-running the route command will show the that we have a route added to reach the 2.0 network through the router.
+
+Now, remember this has to be configured on each system
+
+for e.g , if system C on network 2.0 need to send a packet to a system on network 1.0
+
+[~]$ ip route add 192.168.1.0/24 via 192.168.2.1
+
+12. Now suppose this system need access to internet . Say they need access to google at 172.217.194.0 network on the internet, so you connect router to the internet.Then add a new route in your routing table to route all traffic to the network 172.217.194 through your router.
+
+[~]$ ip route add 172.217.194.0/24 via 192.168.2.1
+
+13. There are so many different sites on different networks on the internet. instead of adding routing table entry as in point 12 with the same router IP address for each of those networks,you can simply say for any networks that you don't know route to, use this router as a default gateway.This way , any request to any network outside of your existing network goes to this particular router.
+
+So in a simple setup like this all you need is a single routing table entry with teh default gateway set to the routers ip address.
+
+•Instead of word default you can also say 0.0.0.0. It means any IP destination
+• A 0.0.0.0 entry in the gateway field indicates that you don't needa gateway
+
+
+[~]$ ip route add default via 192.168.2.1
+
+14. take away commands from this lesson
+
+• ip link command is to list and modify interfaces on the host
+[~]$ ip link
+
+• ip addr command is to see the ip addresses assigned to those interfaces .
+[~]$ ip addr
+
+• ip addr add command is used to set ip addresses on the interfaces
+
+ip addr add 192.168.1.10/24 dev eth0
+
+*** Note: Changes made using these commands are only valid till a system restart.If you want to persist these changes , you must set them in the /etc/network/interfaces file.
+
+• ip route or simply the route command is used to view the route table
+
+[~]$ ip route
+
+• ip route add command is used to add entries into the routing table.
+[~]$ ip route add 192.168.1.0/24 via 192.168.2.1
+
+
+
+
+
+
