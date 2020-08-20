@@ -1,0 +1,52 @@
+1. DAS = Direct Attached Storage
+   NAS = Network Attached Storage
+   SAN = Storage Area Network
+
+2. DAS 
+• With DAS external storage is attached directly to the host system that requires the space .
+• The host operating system sees a connected desk device as a blocked device. 
+• There is no network or firewall between the storage and host which means this provides excellent performance at a very affordable cost. 
+
+• DAS generally has a faster response than a NAS device where the data traffic goes over the network . 
+
+• The downside is since the DAS is directly attached , it is dedicated to a single server. As a result, this is not ideal for enterprise environments where multiple servers need storage ans is more suitable for small business.
+
+3. NAS 
+
+• NAS at other hand is suitable for mid to large businesses . 
+
+•NAS storage is generally located apart from the hosts that will consume space from it. 
+
+•The data traffic between the storage and the host is through the network. The physical distance between the two may not be significant. They may be located in the same rack in a data center , for example . Yet, the data would have to traverse through the network . The
+NAS is file storage device , unlike DAS and SAN which are block storage devices.
+
+The storage is provided to the hosts in the form of a directory or a share that is physically present in the NAS device but exported via NFS to the hosts.As a result this type of storage is ideal for centralized shared storage that needs to be accessed simultaneously by several different hosts.The performance of NAS and high speed ethernet connectivity between the two , it can provide good performance and highly available storage solution.
+
+This type of storage can be used as backend storage for web servers or application servers and can even run databases, although not recommended for production workloads.
+
+NAS is not a recommended storage for installing operating systems
+
+NAS
+•NFS/CIFS
+•Reasonably Fast and Reliable
+•File Based Storage
+•Shared Storage
+•Not suitable for OS install
+
+3. SAN - Storage Area Network
+
+• SAN provides block storage used by enterprises for business-critical applications that needs to deliver high throughput and low latency.
+• Storage is allocated to hosts in the form of a LUN which stands for Logical Unit Number.A LUN is a range of blocks provisioned from a pool of shared storage and presented to the server as a logical disk.
+• The host system will detect this storage as a raw disk.
+
+• We can then create partitions and file systems on top of it as we would with any other block device and then mount it on the system to store data.
+
+• While SAN can also be ethernet based, it mainly makes use of FCP which stands for Fiber Channel Protocol. This is a high speed data transfer protocol that makes use of fiber channel switch to establish communication with the host.
+
+• The host servers make use of HBA , or a Host Bus Adapter which is connected to the PCI slot to interface with the fiber channel switch.
+
+• The major advantage of SAN over NAS is that it can be used to host mission critical applications and databases due to its vastly superior performance and reliability.
+
+• These includes installing oracle databases or Microsoft SQL DB, using it for virtualization deployments such as VMWare,KVM,or Microsoft Hyper-V
+
+

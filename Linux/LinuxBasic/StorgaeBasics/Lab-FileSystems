@@ -1,0 +1,40 @@
+1. Which of the following filesystems does not use a journal
+
+Ans: EXT2 does not use a journal and hence has longer recovery boot time
+
+
+2. Out of the disks /dev/vdc and /dev/vdd, which one has a filesystem created?
+
+/dev/vdc is mounted at /mnt/backups . This is only possible if it has a filesystem.
+
+Ans: Run: sudo blkid /dev/vdc
+
+/dev/vdc: UUID="0a12c223-459c-4dac-b928-754f89a2268a" TYPE="ext2"
+
+3. Create an ext4 filesystem on the disk /dev/vdb and mount it at /mnt/data
+
+Ans: 
+Run: sudo mkfs.ext4 /dev/vdb
+sudo mkdir /mnt/data
+sudo mount /dev/vdb /mnt/data
+
+4. What would happen to the mount /mnt/data after a system reboot
+
+The mount is not persistent in FSTAB yet. If the system is rebooted, the filesystem will not be mounted
+
+5. Make the mount persistent across reboot.
+
+Use rw option with the dump and pass numbers both set to 0
+
+Add it in the FSTAB
+sudo vi /etc/fstab
+Add the line /dev/vdb /mnt/data ext4 rw 0 0
+Save and Exit.
+
+- 
+
+
+
+
+
+

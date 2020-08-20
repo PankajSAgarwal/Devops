@@ -1,0 +1,12 @@
+1. Unlike the block devices NFS does not store data in blocks. Instead it save data in the form of files.
+
+2.NFS works on a server-client model.
+3. The term for directory sharing in NFS is called exporting.
+4. The NFS server maintains an export configuration file at /etc/exports that define the clients which should be able to access the directories on the server.
+5. Once the file /etc/exports file has been updated on the server , the directory is shared to the client using exportfs command.
+
+[~]$ exportfs -a // exports all the mounts defined in the /etc/exports file.
+
+[~]$ exportfs -o 10.61.35.201:/software/repos 
+// allows us to manually export a directory. Once exported, you should be able to mount it on a local directory such as /mnt/software/repos using the mount command on the client side.Make a note of the source file system used in the mount command.It is the IP or hostname of the NFS server followed by the directory on the server that we exported seperated by a colon. The network share should now be mounted on the clients.
+

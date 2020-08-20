@@ -1,0 +1,52 @@
+1. We will export directories on the NFS Server called nfs-lab-server and mount them on Bob's laptop.
+
+To access this Server, run ssh nfs-lab-server, Bob's default password is: caleston123
+
+2. How many NFS mounts are available on Bob's laptop right now?
+Run: mount and look for NFS filesystems.
+mount | grep -w nfs
+
+3. SSH to the nfs-lab-server and inspect the /etc/exports.
+
+Bob's password is caleston123
+
+4. How many directories are defined for export in the /etc/exports file in nfs-lab-server?
+Ans:
+sudo cat /etc/exports and count the number of directories defined.
+The lines beginning with a # are comments.
+
+5. Try mounting the /software/repos directory on Bob's laptop at the mountpoint /mnt/data
+
+Are you able to mount?
+Remember: The mount command should be run on the client=caleston-lp10
+
+Ans: Run: sudo mount 172.16.238.101:/software/repos /mnt/data or
+mount nfs-lab-server:/software/repos /mnt/data
+
+6. Why are you not able to mount the directory when it's defined in the /etc/exports file on nfs-lab-server?
+
+The mount command should be run on the client=caleston-lp10
+
+Ans : The directory has not been exported yet. We will use exportfs in the next question to export it.
+
+
+7. Back on the nfs-lab-server export the directory /software/repos to Bob's laptop.
+
+
+Use the export definition in the /etc/exports file.
+
+Ans: On nfs-lab-server, run: sudo exportfs -a
+
+
+8. Try to mount the directory /software/repos again on Bob's laptop at /mnt mount point.
+
+Run: sudo mount 172.16.238.101:/software/repos /mnt .
+Mount should be run on the client machine
+
+
+
+
+
+
+
+

@@ -1,0 +1,59 @@
+1. Partitioning alone does not make a disk usbale in OS.
+2. The disks and the partitions are seen by the linux kernel as a raw disk.
+3. To write a disk or partition, we must create a filesystem.
+4. The file system defines how data is stored on a disk.
+5. After creating a file system,we must mount it into a directory, and that's when we can read or write data to it.
+6. EXT2                                         EXT4
+• 2 TB file size                              • 2 TB File size
+• 4 TB volume size                            • 4 TB Volume size
+• Supports compression                        • Uses Journal  
+• Supports Linux permissions                  • Backwards Compatibile
+• Long Crash Recovery
+
+7. The significant difference between the two file system EXT2 and EXT4 is that, in EXt2 in case of an unclean shutdown such as the one caused by a power outage , it can take quite some time for the system to boot back up. 
+
+EXT3 file system , however , did not have this drawback. It implemented additional features that allowed quicker start up after an ungraceful shutdown.
+
+8. EXT4 further improves the EXT3 file system, and is still one of the most common general purpose file system used today.
+
+9. EXT4
+
+- 16 TB file size
+- 1 Exabyte
+- Uses journal
+- Uses checksum for Journal
+- Backwards compatibile
+
+10. An EXT4 file system can be mounted as EXt3 or EXT2 file system, and similarily EXt3 can be mounted as EXT2.
+
+11. Working with EXT4
+
+- We will make use of /dev/sdb disk to create a EXT4 file system.
+- run the mkfs.ext4 command with the device path as the argument
+[~]$ mkfs.ext4 /dev/sdb1
+[~]$ mkdir /mnt/ext4
+[~] mount /dev/sdb1 /mnt/ext4
+
+- we can check if the file system is mounted by running df command or mount command.
+
+[~]$ df -hP | grep /dev/sdb1
+[~]$ mount | grep /dev/sdb1
+
+- To make this mount available after system reboots, add an entry in the /etc/fstab
+# <file system> <mount point> <type>      <options>                     <dump>  <pass>
+/dev/sdb1         /             ext4  defaults,realtime,errors=panic  0   1       ~
+
+
+FIELD                                     Purpose
+
+File System                 Such as /dev/vdb1 to be mounted
+MountPoint                  Directory to be mounted on
+Type                        Example ext2,ext3,ext4
+Options                     Such as RW= Read-Write, RO = Read-Only
+Dump                        0 = ignore, 1 = take backup
+pass                        0 = ignore,1 or 2 = FSCK file system check enforced
+
+echo "/dev/sdb1   /mnt/ext4   EXT4    rw  0   0" >> /etc/fstab
+
+
+

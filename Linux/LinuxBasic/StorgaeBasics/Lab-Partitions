@@ -1,0 +1,48 @@
+1.How many disk type block devices are present in the system?
+Run: lsblk and look for disk devices
+
+bob@caleston-lp10:~$ lsblkNAME                  MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+fd0                     2:0    1     4K  0 disk
+sr0                    11:0    1  1024M  0 rom
+vda                   252:0    0   294G  0 disk
+`-vda1                252:1    0   293G  0 part  |-host01--vg-root   253:0    0 194.4G  0 lvm  /etc/hosts
+  `-host01--vg-swap_1 253:1    0   980M  0 lvm  [SWAP]
+vdb                   252:16   0    20G  0 disk
+vdc                   252:32   0    20G  0 disk
+vdd                   252:48   0    20G  0 disk
+
+Ans : 5
+
+2. What is the size of the disk /dev/vdc?
+
+Ans : 20 GB
+
+3. What is the major number for the devices beginning with vd ?
+
+
+Inspect the lsblk out put or use a ls -l /dev/vd*
+
+
+Ans : 252
+
+4. How many maximum partitions (primary or extended ) can an MBR have?
+
+Ans: 4
+
+5. How many partitions does the disk /dev/vda have currently?
+
+Ans: run a fdisk -l /dev/vda or lsblk
+
+1
+
+6. Create a GPT partition called vdd1 of size 10G on the disk /dev/vdd
+
+Ans: 
+
+Run: sudo gdisk /dev/vdd
+In the interactive prompt, enter n
+Select parition number = 1 (for vdd1)
+Select default first sector = 2048
+Select +10G when asked for last sector
+Use default hex code = 8300
+Finally type w to write to the partition table

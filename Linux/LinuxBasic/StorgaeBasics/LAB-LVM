@@ -1,0 +1,49 @@
+1. Is LVM installed on this machine?
+
+Try out commands such as pvdisplay or lvs
+2. Install LVM on this machine
+Run sudo apt update and the sudo apt install lvm2 -y
+
+3. Now that LVM is installed, you will find that a physical volume has already been created.
+
+What is the name of this volume?
+Ans: Run: pvdisplay
+
+4. What is the size of this physical volume?
+
+5. What is the name of the volume group created using this PV?
+
+Ans: Run: pvdisplay or vgdisplay
+
+6. Now, we will create a new VG. To do this we will make use of the disks /dev/vdc and /dev/vdd
+
+What are the size of these disks individually?
+Ans : Run: lsblk and inspect the size of disks. Each disk is of size 20G
+
+7. Create PV's using /dev/vdd and /dev/vdc.
+Ans: Run: pvcreate /dev/vdd and pvcreate /dev/vdc
+
+
+8. Create a new volume group called caleston_vg using the newly created PV's
+
+
+Run: sudo vgcreate caleston_vg /dev/vdd /dev/vdc
+9.Create a new logical volume called data from the caleston_vg.
+
+Size of the volume should be 10GB
+
+Ans: Run: sudo lvcreate -L 10G -n data caleston_vg
+
+10. Create an ext4 filesystem on this logical volume and mount it at /mnt/media
+
+Ans: Run: sudo mkdir /mnt/media
+sudo mkfs.ext4 /dev/mapper/caleston_vg-data
+sudo mount /dev/mapper/caleston_vg-data /mnt/media
+
+11. Resize the logical volume to 30GB
+Do not unmount the filesystem.
+
+
+Ans : Run: sudo lvresize -L +20G -n /dev/mapper/caleston_vg-data
+sudo resize2fs /dev/mapper/caleston_vg-data
+

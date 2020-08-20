@@ -1,0 +1,76 @@
+1. Block Device - is a type of file that can be found under /dev directory. It usually represents a piece of hardware that can store data.
+
+Traditional spinning hard disk or solid-state disk (SSD) are exmaples of block storage in Linux.It is called block storage because data is read or written to it in blocks or chunks of space.
+
+2. To see the list of block devices in your system , run the command lsblk.
+
+[~]$ lsblk
+
+you can also use the below command 
+
+[~]$ ls -l /dev/ | grep "^b"
+
+3. Each block device has a major and minor number . The major number is use to identify the block device. The minor number are used to distinguish individual, physical or logical devices.
+
+Major number  Device Type
+
+1               RAM
+3               HardDisk or CD ROM
+6               Parallel Printers
+8               SCSI DISK
+
+4. The information about partitions are stored in a partition table.
+
+• fdisk - It can be used to list the partition table information as well as create and delete partitions.
+
+[~]$ sudo fdisk -l /dev/sda
+
+5. Partition types 
+
+• Primary partition - is a type of partition that can be used to boot an operating system. Traditionally, disks were limited to not more than 4 primary partitions per disk.
+
+• Extended Partition - is a type of partition that cannot be used on its own but can host logical partitions.With the restrictions of maximum four primary partitions, youy can opt to create extended partitions and carve out logical partitions inside it.
+
+Essentially an extended partition is a disk drive in its own right . it has a partition table that points to one or more logical partitions.
+
+• Logical partition - are those which are created within an extended partition
+
+6. How a disk is partioned is defined by a partioning scheme also know as partition table.
+
+7. One of the popular partitioning scheme is MBR(Master Boot Record). 
+
+•There can only be 4 primary partitions in MBR.
+• Maximum size per disk is 2 TB
+• If you want more than 4 partitions per disk, we would need to create fourth partition as an extended partition and carve out logical partitions within it.
+
+8. GPT Partitioning scheme
+
+• stands for GUID Partition Table
+• more recent partitioning scheme and was created to over come some of the limitations of MBR.
+• Theortically, GPT can have unlimited number of partitions per disc.
+This is usually only limited by the restrictions from Operating System. e.g RHEL only allows 128 partitions per disc.
+•Additionally,the disc size limitations of 2TB does not exist in GPT.
+• Unless the OS you want to install on the disc requires MBR, GPT is always the best choice when it comes to selecting a partitioning scheme.
+
+9. Creating partitions
+
+• To create a partition on a disk run the gdisk command with the device path as the argument.gdisk is an improved version of fdisk that works with GPT partitioning scheme.
+
+[~]$ gdisk /dev/sdb
+
+• This will take u into a menu driven interface.Once in , use the ? character to print all available options.
+• Now type N key to create a new partition. We want to create a partition number one with a size of 20 GB.
+• Once you select the partition size, it will ask for a hex code for the partition type.
+Stick to the default of linux system which is 8300.
+• You can type L key to see all posisble values 
+• Once you provide all the necessary information, use the W command to write to the partition table.This will create a new partition called /dev/sdb1
+• To check the status of new partition run lsblk command or fdisk -l command
+
+[~]$ sudo fdisk -l /dev/sdb
+
+You can the partition table using the gdisk -l command as well.
+
+
+
+
+
