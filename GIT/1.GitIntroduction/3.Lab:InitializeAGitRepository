@@ -1,0 +1,56 @@
+1. What is the command to initialize a git repository?
+
+a) git pull b) git clone c) git push d) git init
+
+Ans: git init
+
+2. Initialize a git repository at /home/sarah/story-blog
+Create directory if it doesn't already exist.
+
+Hint: Run mkdir /home/sarah/story-blog to create directory and then run cd /home/sarah/story-blog; git init
+
+3. Which hidden folder gets created after initializing a git repository?
+
+Hint: Run ls -la inside /home/sarah/story-blog directory to see hidden folders
+
+Ans: .git
+
+4. Once a git repository has been initialized, which stage contains the active changes in your local git repository?
+
+a) Pushed files b) Working area c) Committed files d) Staging Area 
+
+Hint: All files in a GIT Repo just initialized are in the Working Area
+
+5. Let’s add a file to our project inside /home/sarah/story-blog
+
+File name: lion-and-mouse.txt
+
+File content: A Lion lay asleep in the forest
+
+Hint: Run touch lion-and-mouse.txt; echo "A Lion lay asleep in the forest" >> lion-and-mouse.txt
+
+6. Which stage contains new changes that will soon be committed to local git repo ?
+
+Hint: Files that are added are moved to the Staging Area
+
+7. Configure git when using for the first time
+
+Hint: Run cd /home/sarah/story-blog; git config user.email sarah@example.com;git config user.name sarah
+
+
+8. Adding the file notes.txt to .gitignore
+
+echo notes.txt >> .gitignore
+
+
+
+
+
+
+
+
+
+
+
+
+

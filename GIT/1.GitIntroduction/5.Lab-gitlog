@@ -1,0 +1,53 @@
+1.Which info is not displayed in git log?
+
+a) List of changed files b) Date of commit c) Commit hash
+d)Author name
+
+Ans: a) List of changed files
+
+2. To list the changed files with git log 
+
+git log --name-only
+
+3. Which branch has the changes been committed to?
+
+
+Branch info can be seen in first line of git log output where (HEAD -> {BRANCH_NAME} ) is displayed
+
+4. Another user has committed a new file to the repository now. Identify the user and the new file that was added.
+
+
+Commit message: Added a new story.
+
+Use the --name-only option to view the files as well
+
+5. What is the option for git log command to display the logs in compact way (one log per line)?
+If not sure try each one.
+a) --verbose b) --comapct c)--compress d)--oneline
+
+Ans: --oneline
+
+6. The repository has many commits. Can you try to list the last 3 commits alone?
+
+There should be an option in git log to limit the list of outputs. Use git help log. Check hint if not sure.
+
+Hint: You may list the last few commits alone using the --max-count option like this git log -n 3 or git log --max-count 3
+
+Ans: git log -n 3
+
+      OR
+  git log --max-count 3
+
+  7. Identify who made the latest commit in the new repository.
+
+  git log -n 1 --name-only
+
+8. Judging by their actions, can you guess who may be the javascript developer in the team?
+
+
+Look at the logs and identify the person who made changes to the .js file recently. You have already learned the option to display files associated with a commit
+
+Hint: Go to cd /home/sarah/learning-app-ecommerce and run git log --name-only and look for the commit that changed the file js/theme.js
+
+
+

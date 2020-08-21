@@ -1,0 +1,93 @@
+1. What is the default branch of a git repository?
+
+Ans : master
+
+2. To which branch is the 🦁 lion-and-mouse.txt 🐭 file committed to in the git repository?
+
+Hint: git log --decorate
+
+3. Sarah decides to write a new story - 🐸 The Frogs and Ox 🐂. Let's create and checkout a new branch named story/frogs-and-ox
+
+Hint:Run git checkout -b story/frogs-and-ox
+
+4.View the output of the git log command and identify the branch to which HEAD is pointing to now.
+
+Hint:Check branch HEAD pointer in git log output
+
+As you can see the HEAD always points to the last commit on the currently checked-out branch.
+
+5.Max informs Sarah that in her first story there's a typo in the title and needs to be fixed ASAP!
+
+We must go back and fix the story in the master branch. But before we do that, let's commit the new story we have written so far. We don't want to carry our incomplete story to the master branch.
+
+Stage and commit the story with the message Add incomplete frogs-and-ox story
+Hint:Run git add frogs-and-ox.txt; git commit -am 'Add incomplete frogs-and-ox story'
+
+
+ -  If you made a mistake run 'git reset --soft HEAD~1' command to revert the last change.
+
+ 6. Now checkout the master branch.
+Hint : Run git checkout master
+
+7.Let's fix the typo in the lion-and-mouse.txt file. LION 🦁 is mis-spelt as LIOON. Please fix it and then commit the changes.
+
+Commit message: Fix typo in story title
+
+Use vi editor to edit the file and fix the typo. Then run the command git commit -am 'Fix typo in story title'
+
+8.Great! Now that it's out of the way, let's finish the 🐸 frogs-and-ox 🐂 story. Switch back to the story/frogs-and-ox branch.
+
+Hint: Run the command git checkout story/frogs-and-ox
+
+9.Sarah has now finished her story. Check the changes and commit them with the message Completed frogs-and-ox story
+
+Hint:Run the command git commit -am 'Completed frogs-and-ox story'
+
+10.A new git repository is created at the path /home/sarah/website for hosting the story website.
+
+Count the number of branches available in that repository including the master branch.
+
+Hint: Change to directory cd /home/sarah/website and run git branch command
+
+11. Looking at the commit history, try to guess what branch was the feature/signout branch created from?
+
+
+Checkout branch feature/signout and then use the command git log --graph --decorate to see previous commit history along with the branch they were committed on.
+
+Hint:git checkout feature/signout; git log --graph --decorate
+
+output of git checkout feature/signout;
+git log --graph --decorate
+
+
+
+* commit aacb6d6c29b08d8b413b82811092f1947ff37619 (HEAD -> feature/signout)
+| Author: sarah <sarah@example.com>
+| Date:   Fri Aug 21 16:40:17 2020 +0000
+|
+|     Add signout page
+|
+* commit b608f594e999e63c03639ccec7bc9e200de3f2b6 (feature/signup)
+| Author: sarah <sarah@example.com>
+| Date:   Fri Aug 21 16:40:17 2020 +0000
+|
+|     Add signup page
+|
+* commit 503552ed84a338e594d54ee0360e9c115384d98d (master)
+  Author: sarah <sarah@example.com>
+  Date:   Fri Aug 21 16:40:17 2020 +0000
+
+      Added main page
+
+Ans: feature/signup
+
+
+
+
+
+ 
+
+
+
+
+

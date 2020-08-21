@@ -1,0 +1,32 @@
+1. A branch is basically a pointer to the last commit
+2. # Create a new branch
+
+git checkout <<branch name>>
+
+e.g $ git checkout -b pankaj
+Switched to a new branch 'pankaj'
+
+3. To see the list of branches and the branch on which we are currently
+
+$ git branch
+
+master
+* pankaj
+
+4. # Switch to an existing branch
+
+$ git checkout pankaj
+
+5. # Create a new branch and immediately switch to that branch.
+
+$ git checkout -b pankaj
+
+6. # Delete a branch
+
+$ git branch -d pankaj
+
+7. # list all branches
+
+$ git branch
+
+8. A HEAD is where you are right now in a git repository.HEAD points to the last commit in the branch that you are currently on.When you switch branches the HEAD moves with you

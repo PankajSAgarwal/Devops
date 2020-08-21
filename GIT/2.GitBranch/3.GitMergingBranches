@@ -1,0 +1,26 @@
+1. Git merge command receives the name of the branch that we want to merge into current branch.
+
+2. E.g we need to merge feature/signup branch into master branch
+
+Steps: 1. checkout master
+       2. merge feature/signup
+
+$ git checkout master
+$ git merge feature/signup
+
+3. Git can perform two types of merge
+a) fast-forward merge
+b) no-fast-forward merge
+
+4. A fast forward merge can happen when a current branch has no extra commits compared to the branch we are merging.
+
+5. Git is lazy and will try to perform the easiest option which is fast-forward .
+
+6. fast-forward merge does not create a new commit, but rather merges to commits on the branch that we are merging right into the current branch.
+
+7. if we commit changes on the current branch that the branch we want to merge does not have ,git will perform a no-fast-forward merge
+
+8. With a no-fast-forward merge git creates a new merging commit on the active branch
+
+The commits parent commit to both the active branch and the branch we want to merge
+

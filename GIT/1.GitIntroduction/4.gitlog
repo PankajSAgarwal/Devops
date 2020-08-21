@@ -1,0 +1,7 @@
+1. $ git log
+
+Shows all the information about the commits like commit hash,author name , date of the commit and the commit message
+
+2. To show commit details in oneline with less details
+
+git log --oneline

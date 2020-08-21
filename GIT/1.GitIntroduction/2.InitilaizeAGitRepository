@@ -1,0 +1,34 @@
+1. Initialize a git repo
+$ git init
+2. Checking the status of git
+
+$ git status
+
+3. Add a file to staging area
+
+git add story1.txt
+
+4. A commit records the change of a repository compared to its previous state.
+To commit the files which are in staging area
+
+$ git commit -m "Added first story"
+
+5. git config user.name "pankaj"
+6. git config user.email "pankaj@example.com"
+7. To restore the file to previous commit (i.e to discard current changes)
+
+$ git restore story1.txt
+
+8. To move a file out of staging area
+
+git restore --staged story1.txt
+
+9. To remove a tracked file from git
+
+git rm --cached notes.txt // --cached will move the file out of staging area but not permanently delete it from the directory
+
+git rm -f notes.txt // -f will delete the file permanently from the directory
+
+10. To instruct git to permanently ignore a file use .gitignore
+
+echo "notes.txt" >> .gitignore

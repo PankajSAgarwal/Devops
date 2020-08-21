@@ -1,0 +1,61 @@
+1. Identify the OS environment is built on
+Ans: Run the command cat /etc/*release* and identify the name
+
+
+2. Install GIT on the system.
+
+
+Remember to use sudo to elevate permission while installing.
+
+Refer to the GIT installation documentation here: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+
+Ans: Run sudo apt update and then sudo apt install git -y
+
+3.Identify the version of git you just installed.
+Run git --version to check version
+
+4.Let's see if you can figure some stuff out using the git help command.
+
+What's the git command used to Show various types of objects?
+a)show b) log c)status d) clone
+Ans:
+Run git help command and look at the description of each command
+
+ans: show
+
+5. What's the git command used to List, create, or delete branches?
+a) tag b) status c) checkout d) branch
+Ans: Run git help command and look at the description of each command
+
+Ans: branch
+
+6. What's the git command used to Download objects from another repository?
+
+a) fetch b) merge c)push d)branch
+
+Ans: Run git help command and look at the description of each command
+
+ans: fetch 
+7. What's the git command used to start a working area?
+a) pull b) reset c) add d) init
+Ans: init
+
+8. You may view additional help on each command following the syntax git help <command>. For this you must first install git man pages using the command sudo apt-get install git-man
+
+
+Once done use the help of the init command with the command git help init and identify the option used to create a bare repository.
+
+We will learn about initializing a repository later in this course.
+
+a) -q b)--br c)-bare d) -b e)--bare
+
+Ans: Run git help init command and identify the option used to create a bare repository
+
+
+--bare
+
+
+
+
+
+

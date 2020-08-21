@@ -1,0 +1,34 @@
+1. Let's proceed with where we left off in the previous lab. Sarah's local repository should be available at /home/sarah/story-blog
+
+
+How many stories are currently available in the master branch?
+
+Hint:Run cd /home/sarah/story-blog; git checkout master and then list the files ls
+
+
+2. How many branches does the repository currently have?
+
+Hint: Run git branch
+
+3. The new story Sarah wrote is in the story/frogs-and-ox branch. It's time to merge the branch and bring it to the master branch.
+
+But before that look at the log of the master and story/frogs-and-ox branches and identify how many commits there have been in the past on each branch.
+
+4. While in the master branch merge the story/frogs-and-ox branch. If prompted for a commit message leave it to the default and quit the editor.
+
+Hint: Run git merge story/frogs-and-ox
+
+Check git log now and it should show commit message as Merge branch 'story/frogs-and-ox'
+
+5. Check the log of the master branch and see how many commits are seen now
+
+Hint: Run git log --oneline
+
+6. Git merged all the commits we made in the story/frogs-and-ox branch to the master branch. But since we made an additional commit on the master (fixing the typo from LIOON to LION) git created a new merge commit
+
+
+
+
+
+
+
