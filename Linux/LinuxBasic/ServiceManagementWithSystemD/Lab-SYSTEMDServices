@@ -1,0 +1,110 @@
+1. What is the status of the sample.service unit?
+
+Run: sudo systemctl status sample.service
+
+
+2. Try starting the service
+
+Does the it start?
+
+Run: sudo systemctl start sample.service
+
+3. Why did the service start fail?
+Run: sudo journalctl -u sample.service
+
+
+-- Logs begin at Fri 2020-08-21 08:12:36 UTC, end at Fri 2020-08-21 08:16:07 UTC. --
+Aug 21 08:14:36 caleston-lp10 systemd[1]: sample.service: Service lacks both ExecStart= and Exe
+Aug 21 08:15:34 caleston-lp10 systemd[1]: sample.service: Service lacks both ExecStart= and Exe
+
+So service section is not defined
+
+4. Update the [Service] section
+
+Set the ExecStart to run the script /bin/bash /root/sample_script.sh.
+Once done, start the service.
+
+Run: sudo vi /etc/systemd/system/sample.service
+Add /bin/bash /root/sample_script.sh to ExecStart
+Save and Exit
+sudo systemctl start sample.service
+
+5. Inspect the status of the service now.
+What is the status?
+Run: sudo systemctl status sample.service
+
+
+o/p - * sample.service - A template service unit file. Use this to create a service
+   Loaded: loaded (/etc/systemd/system/sample.service; disabled; vendor preset: enabled)
+   Active: active (running) since Fri 2020-08-21 08:19:02 UTC; 1min 40s ago
+ Main PID: 202 (bash)
+    Tasks: 2 (limit: 2336)
+   CGroup: /system.slice/containerd.service/system.slice/sample.service
+           |-202 /bin/bash /root/sample_script.sh
+           `-225 sleep 100
+
+Aug 21 08:19:02 caleston-lp10 systemd[1]: Started A template service unit file. Use this to cre
+Aug 21 08:19:02 caleston-lp10 bash[202]: Fri Aug 21 08:19:02 UTC 2020
+Aug 21 08:20:42 caleston-lp10 bash[202]: Fri Aug 21 08:20:42 UTC 2020
+
+6. Enable this service now so that it will be started automatically after a reboot for multi-user.target
+
+Run: sudo systemctl enable sample.service
+
+ans: 
+bob@caleston-lp10:~$ sudo systemctl enable sample.service
+
+output:
+Created symlink /etc/systemd/system/multi-user.target.wants/sample.service -> /etc/systemd/system/sample.service.
+
+7. Now update the service to ensure that it restarts when stopped for any reason.
+
+user Restart=always derivative.
+
+Hint: Run: sudo vi /etc/systemd/system/sample.service
+Add Restart=always to the Service section.
+Save and Exit
+
+Ans: 
+
+[Unit]
+Description=A template service unit file. Use this to create a service
+
+[Service]
+ExecStart=/bin/bash /root/sample_script.sh
+Restart=always
+[Install]
+WantedBy=multi-user.target
+
+8. Try and restart the service now.
+
+There seems to be a warning. What is the fix?
+a) Releoad the unit b) Fix the unit file c)Fix Permisions
+Hint:sudo systemctl start sample.service or restart will fail.
+Since you updated the service unit file, you need to reload it first.
+
+Ans: a) Releoad the unit
+
+9. Reload the service unit file
+
+Hint:Run: sudo systemctl daemon-reload
+
+10 How would you check the errors encountered earlier when the sample service did not have a valid service section?
+
+a) journalctl -u sample.service
+b) systemctl status sample.service -l
+c) cat /var/log/faillog
+
+Hint:Run: journalctl -u sample.service
+
+Ans: a) journalctl -u sample.service
+
+
+
+
+
+
+
+
+
+

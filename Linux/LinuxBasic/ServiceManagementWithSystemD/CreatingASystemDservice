@@ -1,0 +1,111 @@
+1. Program - /usr/bin/project-mercury.sh
+- This program needs to be started in the background and enabled to start during boot.
+- The script starts Python Application after Postgress DB
+- The Psotgress service should be up and running before python application can be started
+- Use service account project_mercury 
+- Auto restart on failure
+- If it fails system tries to restart in interval of 10 seconds
+- You should be able to shutdown service yourself.In this case it should not restart automatically.
+- Log service events . The application events like start,stop,and failures should be logged somewhere.This is important so that reason for failure can be investigated later.
+- Load when booting into graphical mode . The service should start with all these conditions and the graphical target
+
+2. To run a command in the background , it has to be defined as a service.
+
+- For this we need to create a service unit file. This file needs to be created under /etc/systemd/system directory.
+
+/etc/systemd/system/project-mercury.service
+
+[Service]
+ExecStart= /bin/bash /usr/bin/project-mercury.sh
+
+3. To run the above service in background , issue the below command
+
+[~]$ systemctl start project-mercury.service
+
+4. To check the status of the service 
+
+[~]$ systemctl status project-mercury.service
+
+5. To stop the service`
+[~]$ systemctl stop project-mercury.service
+
+6. To allow this service to be enabled during boot, add another section called install
+
+/etc/systemd/system/project-mercury.sh
+
+[Service]
+ExecStart=/bin/bash /usr/bin/project-mercury.sh
+
+[Install]
+WantedBy graphical.target
+
+7. Lets add the service account to be used to start the service instead of root.Use directive User and assign service account to it.
+
+/etc/systemd/system/project-mercury.sh
+
+[Service]
+ExecStart=/bin/bash /usr/bin/project-mercury.sh
+
+User=project_mercury
+
+[Install]
+WantedBy graphical.target
+
+8. Use Restart directive to define how and when to restart the service.Restart=on-failure directive will ensure that the system attempt to restart the service on failure
+
+/etc/systemd/system/project-mercury.sh
+
+[Service]
+ExecStart=/bin/bash /usr/bin/project-mercury.sh
+
+User=project_mercury
+Restart=on-failure
+
+[Install]
+WantedBy graphical.target
+
+9. RestartSec derivative can be used to set the time in seconds to wait before the system attempts to restart it.
+
+/etc/systemd/system/project-mercury.sh
+
+[Service]
+ExecStart=/bin/bash /usr/bin/project-mercury.sh
+
+User=project_mercury
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy graphical.target
+
+10. With Systemd, the service events are automatically logged . So the requirement of logging is automatically taken care of without  any additional configuration
+
+11. Since the python application is dependent on PostgressDB being up , we can define a dependency that make sure our new service is started only after the postgress DB is ready.To do this we need to define another section called Unit.. Under this section , use the After derivative and set its value to Postgresssql.service. You can also add description and any documentation you may have about it.
+
+/etc/systemd/system/project-mercury.sh
+[Unit]
+Description=Python Django for Project Mercury
+Documentation=http://wiki.caleston-dev.ca/mercury
+
+After=postgresql.service
+
+[Service]
+ExecStart=/bin/bash /usr/bin/project-mercury.sh
+
+User=project_mercury
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy graphical.target
+
+These are not mandatory but considered to be a good practice
+
+12. For the system to detect the changes made run below command
+
+[~]$ systemctl daemon-reload
+
+13. To start the service 
+[~]$ systemctl start project-mercury.service
+
+

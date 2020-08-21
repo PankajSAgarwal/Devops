@@ -1,0 +1,90 @@
+1. SYSTEMCTL is the main command used to manage services on a SYSTEMD-managed server.
+2. It can be used to manage services such as start,restart,stop or reload a service as well as enable/disable services to start during the system boot.It is also used to view information about and manage the system state.
+3. SYSTEMCTL
+- MANAGE SYSTEM STATE
+- START/STOP/RESTART/RELOAD
+- ENABLE/DISABLE
+- LIST AND MANAGE UNITS
+- LIST AND UPDATE TARGETS
+
+4. JOURNALCTL
+
+This command can query the contents of the SYSTEMD logging system called journal and is a convinient troubleshooting tool to figure out issues such as service failures
+
+5. JOURNALCTL
+
+Query SYSTEMD Journal
+
+6. To start a service 
+[~]$ systemctl start docker
+
+7. to stop a service
+[~]$ systemctl stop docker
+
+8. To restart . This will attempt to bring down the service and then bring it back up
+[~]$ systemctl restart docker
+
+9. if you wish to releoad the service without interrupting the normal functionality
+[~]$ systemctl reload docker
+
+10. To enable a service and make it persistent across reboot
+
+[~]$ systemctl enable docker
+
+11. To disable service at boot
+[~]$ systemctl disable docker
+
+12 . to view the state of the service
+
+[~]$ systemctl status docker
+
+13. STATE         Meaning
+
+ACTIVE            Service running
+Inactive          Service stopped
+Failed            Crashed/error/Timeout etc.
+
+14. Running the below command after making changes to a service unit file reloads the system manager configuration and makes the SYSTEMD aware of the changes.
+A running service whose unit file has been updated on the disk can only be restarted after running the systemctl daemon-reload command.
+
+[~]$ systemctl daemon-reload
+
+15. You can also make changes to unit files using  the systemctl edit command.
+
+[~]$ systemctl edit project-mercury.service --full
+
+The baove command will open the service configuration file with a text editor. Units edited this way apply the changes immediately without having to run the daemon-reload.
+
+16. to see the current runlevel or the target
+[~]$ systemctl get-default
+
+17. To change run level to a different target,
+[~]$ systemctl set-default multi-user.target
+
+18. systemctl also provides a good deal of information about the system
+
+19. To list all the units systemd has loaded or attempted to load use the systemctl
+
+[~]$ systemctl list-units --all
+
+20. To see information about active units only
+
+[~]$ systemctl list-units
+
+21. JOURNALCTL is useful when troubleshooting issues with SYSTEMD units as it checks the journal or log entries from all part of the system.
+
+22. To print all the log entries from the oldest entry to the newest
+
+[~]$ journalctl
+
+23. To see the logs from the current boot
+[~]$ journalctl -b
+
+24. To see the log entries for a specific unit
+[~]$ journalctl -u <<UNIT>>
+e.g journalctl -u docker.service
+
+The data provided by the log entries for a service file generally provide the reason why a service unit is inactive or failed state.This is great for debugging issues with config files or issues with service dependencies,etc.
+
+
+
