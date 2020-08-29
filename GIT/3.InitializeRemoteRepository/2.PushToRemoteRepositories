@@ -1,0 +1,5 @@
+1. in order to keep loacal and remote repo in sync we need to push data from local repo to remote repo.
+
+2. git push origin master
+
+- git push requires two arguments , alias of remote repo and current branch which we are on

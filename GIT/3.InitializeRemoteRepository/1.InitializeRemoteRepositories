@@ -1,0 +1,23 @@
+1. Popular platform for remote repository
+-Github
+-GitLab
+-Bitbucket
+2.Once we successfully initialize a repository on one of these platforms , we get access to something called as connection string.
+3. A connection string is a url that we can use in order to let Git know where the remote repository is located
+
+e.g https://github.com/PankajSAgarwal/Devops.git
+
+4. We can add a remote repository to our local project with git remote add command.We want to add a remote repository and give it an alias origin
+
+git remote add origin https://.../.../[name].git
+
+. A name for the remote
+. Can have multiple remotes
+
+5. To list all remote repositories
+
+$ git remote -v
+
+origin https://.../.../[name].git (fetch)
+origin https://.../.../[name].git (push)
+

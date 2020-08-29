@@ -1,0 +1,23 @@
+1. Kubernetes also called as K8s was built by Google
+2. What are Containers?
+
+- Compleletely isolated environment
+- They can have their own processes or services,their own networking interfaces , their own mounts just like virtual machines except they all share the same OS kernel.
+
+3. Containers are not new with Docker.Some of the different kind of containers are LXC,LXD,LXCFS etc.
+
+4. Docker utilizes LXC container. Setting up these container environment is hard as they are very low level and that is where Docker offers a high level tool with several powerful functions making it really very easy for end users like us.
+
+5. What does it mean by Docker container share the underlying kernel
+
+Lets say we have a system with Ubuntu OS with Docker installed on it. Docker can run any flavour of OS on top of it as long as they are all based on the same kernel, in this case Linux. If the underlying OS is Ubuntu, Docker can run a container based on another distribution like Debian,Fedora,Suse or centOS.
+
+You will not be able to run a Windows based container on a docker host with Linux OS on it.For this you will need Docker on Windows server
+
+6. Unlike hypervisor docker is not meant to virtualize and run different operating systems and kernels on the same hardware. The main purpose of Docker is to containerize applications and to ship them and run them .
+
+7. Most organization have their product containerized and available on a public docker registry called docker hub or docker store already.
+
+8. An image is a package or a template just like a VM template. It is used to create one or more containers.
+
+Containers are running instances of images that are isolated and have their own environments and set of processes

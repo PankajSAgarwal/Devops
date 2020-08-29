@@ -1,0 +1,37 @@
+1. Target remote repo URL : http://git.example.com/sarah/story-blog.git
+
+remote repo alias : origin
+
+Let's now configure the remote repository for the local repository at /home/sarah/story-blog
+
+Hint:Run cd /home/sarah/story-blog; git remote add origin http://git.example.com/sarah/story-blog.git
+
+
+2. Which command can be used to push data to our remote repo?
+
+
+remote repo alias : origin
+
+remote branch : master
+
+Ans: git push origin master
+
+3.Let's explore the repositories and teams in our organization and see who is doing what.
+
+How many users can you see in the Gitea tool?
+
+Ans: In the top menu bar select Explore -> Users
+
+4.Who owns the most number of repositories?
+
+Hint:In the top menu bar select Explore -> Repositories and count the number of repositories for each user.
+
+5. Tej seems to be working on an ecommerce application. How many commits have been made in that repository?
+
+Hint:In the top menu bar select Explore -> Repositories -> tej/ecommerce and look at the number of commits.
+
+6. Sarah seems to have accidentally created a repository for story-blog mis-spelt as story-bloggg. Please delete it.
+
+Hint:Go to story-bloggg repository in GUI and click on settings.
+
+Scroll all the way down and click on Delete This Repository option. Then follow the instructions.

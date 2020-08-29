@@ -46,3 +46,6 @@ scp /home/bob/caleston-code.tar.gz devapp01:/home/bob
 • to copy the directories instead of files use -r and preserve the ownership and permission of the source file use -p flag
 
 scp -pr /home/bob/media/ devapp01:/home/bob
+
+
+

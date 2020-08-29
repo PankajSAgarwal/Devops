@@ -1,0 +1,26 @@
+1. First max needs to download the current code (stories) uploaded by Sarah in remote repository. As user Max, clone the remote repo to his home directory - /home/max
+
+Target repo web URL : http://git.example.com/sarah/story-blog
+
+You can also find this URL from UI
+
+Hint:Run cd /home/max; git clone http://git.example.com/sarah/story-blog.git
+
+2. Let us now try to commit the changes. Try to commit the changes with the message Added fox-and-grapes story. And you might get an error that says Please tell me who you are
+
+This is because Max has cloned the repository, but Git doesn't know who Max is. Max needs to tell Git his username and email address. For this use the command git config user.email "max@example.com" and git config user.name "max"
+
+Hint:Run git add fox-and-grapes.txt and then git commit -m 'Added fox-and-grapes story'
+
+3.If you ran into an issue it is because the repository is public but not everyone can change it. It is public but read-only. To push changes to the repository you need to be a collaborator or a member of the project.
+
+
+The account owner - Sarah needs to add you as a collaborator. While logged in to the Gitea UI as user sarah go to Settings -> Collaborators of the project and add max as collaborate with Write permissions.
+
+Use Sarah's credentials:
+Username: sarah
+Password: Sarah_pass123
+
+
+
+
