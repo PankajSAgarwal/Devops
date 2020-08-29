@@ -1,0 +1,119 @@
+1. What is the version of Docker Server Engine running on the Host?
+
+Run the command docker version and look for the version of Server Engine.
+
+2. How many containers are running on this host?
+
+Run the command docker ps and count the number of running containers.
+
+3. How many images are available on this host?
+
+Run the command docker images and count the number of available images.
+
+
+4. Run a container using the redis image
+
+
+Run the command docker run redis
+
+
+5. Stop the container you just created
+
+
+Hit CTRL+C if you are on the container's terminal. Or else run docker stop <container-id>
+
+
+6.How many containers are RUNNING on this host now?
+
+Run the command docker ps and count the number of containers that are running.
+
+
+7. How many containers are RUNNING on this host now?
+
+
+We just created a few.
+
+Run the command docker ps and count the number of containers that are running.
+
+
+8. How many containers are PRESENT on the host now?
+
+
+Including both Running and Not Running ones
+
+
+Run the command docker ps -a
+
+
+9. What is the image used to run the nginx-1 container
+
+
+Run the docker ps command and check under the IMAGE column
+
+
+10. What is the name of the container created using the ubuntu image
+
+Run the docker ps command and look at the NAMES column
+
+11. What is the ID of the container that uses the alpine image and is not running
+
+
+Run the docker ps -a command and identify the ID of the container that uses alpine image
+
+12. What is the state of the stopped alpine container?
+
+Run the command docker ps -a and look at the STATUS column.
+
+
+13. Delete all containers from the Docker Host
+
+
+Both Running and Not Running ones. Remember you may have to stop containers before deleting them.
+
+
+To stop containers run the command docker stop <container id | container name>
+And then to delete them run docker rm <container id | container name>
+
+
+14. Delete the ubuntu Image
+
+Command docker rmi ubuntu
+
+
+15. You are required to pull a docker image which will be used to run a container later. Pull the image nginx:1.14-alpine
+
+
+Only pull the image, do not create a container.
+
+
+Run the command docker pull nginx:1.14-alpine
+
+
+16. Run a container with the nginx:1.14-alpine image and name it webapp
+
+docker run --name webapp nginx:1.14-alpine
+
+17.Cleanup: Delete all images on the host
+
+
+Remove containers as necessary
+
+
+Run the docker rmi command
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

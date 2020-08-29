@@ -1,0 +1,82 @@
+1. Explore docker images on Docker hub
+
+https://hub.docker.com/explore
+
+2. Pull a centos docker image from docker hub
+
+docker pull centos
+
+3. to run a docker image(docker run) and automatically login to docker container when docker runs(-it) and execute bash command of the centos instance (centos bash)
+
+docker run -it centos bash
+
+4. list all running container
+
+docker ps
+
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+5. to run a docker centos image in background and sleep for 20 seconds and exits
+
+docker run -d centos sleep 20
+
+-d - run in background
+sleep 20 - command given to docker image centos
+
+6. How to list all containers , running as well exited
+
+docker ps -a
+
+7. To stop a running docker container,
+
+docker stop <<container id/container name>>
+
+8. A container that exits in a regular manner will have an exit code of 0.
+A running container that is stopped with docker stop command will exit with a non-zero code
+
+9. To remove docker container
+
+docker rm <<container id/container name>>
+
+10. It is possible to provide just first few charcters/digits of conatinerid instead of whole container id and multiple container id to a docker command.
+
+11. To remove multiple stopped docker instances with container id starting with 345 eoa 773 from a system
+
+docker rm 345 eoa 773
+
+12.to list docker images
+
+docker images
+
+13. To remove docker images
+
+docker rmi <<image name>>
+
+e.g docker rmi busybox        // busybox is a very lightweight container
+
+14. docker rmi command  cannot remove images of running containers.
+
+Before removing an image , any container using the image should be removed first.
+
+15. docker rm - remove container
+
+docker rmi - remove docker images
+
+16. To execute a command on a running container (in background) use docker exec command
+
+a) run the  conatiner 
+
+docker run -d ubuntu sleep 100
+
+b) ensure container is running
+
+docker ps
+
+c) docker exec <<container id>> <<command to be executed>>
+
+e.g docker exec c1a19d3a7ca7 cat /etc/*release*  // this will display release   //info about the running ubuntu docker container
+
+17. Run a container with the nginx:1.14-alpine image and name it webapp
+
+docker run --name webapp nginx:1.14-alpine
+

@@ -1,0 +1,31 @@
+1. Why do you need Docker
+
+- Compatibility/Dependency
+- Long setup time
+- Different Dev/Test/Prod environments.
+
+2. What can docker do?
+
+• Containerize Applications
+• run each service with its own dependencies in seperate containers.
+
+3. What are containers
+
+• Containers are commpletely isolated enviornment.As in they can have their own processes or services, their own network interfaces, their own mounts just like virtual machines except they all share same OS kernel.
+
+• Containers are not new . Some of the different types of containers are LXC, LXD,LXCFS etc. Docker utilizes LXC containers. Setting up these containers enviornment is hard as they are very low level and that is where Docker offers a high level tool with several powerful functionalities making it really easy for end users like us to understand how Docker works.
+
+4. Unlike hypervisor , Docker is not meant to virtualize and run different operating systems and kernels on the same hardware.The main purpose of Docker is to package and containerized applications and to ship them and to run them anywhere , anytimes as many times , as you want .
+
+5. Containers vs Virtual Machine
+
+- VMs use more resource utilization,occupy more memory and take more time to boot up compared to containers
+- Docker has less isolation as more resources are shared between the containers like linux kernel whereas VMs have complete isolation as they dont rely on unerlyin OS.
+
+6. Public Docker registry is called Docker hub.
+
+7. Docker Image vs Docker Container
+
+- An Image is a package or template . Image is used to create one or more containers
+- Containers are running instances of images that are isolated and have their own environments and set of processes 
+

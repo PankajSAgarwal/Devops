@@ -1,0 +1,37 @@
+1. The docker run command is used to run a container from an image.
+
+e.g docker run nginx
+
+it will run an instance of the nginx application on the docker host if it already exists.
+
+If the image is not present on the host , it will go out to the docker hub and pull the image down.But this is only done first time . For the subsequent executions , the same image will be reused.
+
+2. ps - list containers
+
+docker ps command list all running containers and some basic information about them such as the container id , the name of the image we used to run the containers, the current status and the name of the container.Each container gets a random ID and name created for it by docker .
+
+e.g docker ps
+
+3. To see all containers running or not
+
+docker ps -a outputs all running as well as previously stopped or exited containers.
+
+e.g docker ps -a
+
+4. To stop a container , use docker stop command but you must provide either the container ID or the container name.If you are not sure of the name run the docker ps command.
+
+On succes of docker stop command you will see the name printed out and running docker ps again will show no running container.
+
+e.g docker stop silly_sammet  
+silly_sammet
+
+5. To remove a stopped or exited container completely so that it doesnt remain lying around consuming space 
+
+docker rm silly_sammet
+silly_sammet
+
+• run the docker ps -a command to confirm it is no longer present
+
+6. to see the list of images and their sizes on our host
+
+docker images
