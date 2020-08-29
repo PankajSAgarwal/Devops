@@ -1,0 +1,70 @@
+1. Node - is a machine, physical or virtual on which kubernetes is installed.
+
+A node is a worker machine and that is where containers will be launched by kubernetes.
+
+It was also known as minions in the past.
+
+2. But what if node on which your application is running fails. Obviously our application also goes down. So we need to have more than one node .
+
+3. A cluster is a set of nodes grouped together.This way even if one node fails, you have your application still accessible from the other nodes.Morever having multiple nodes helps in sharing load as well.
+
+4. Now we have a cluster.But who is responsible for managing the cluster
+Where is the information about members of the cluster stored?
+How are the notes monitored?When a node fails , how do you move the workload of a failed node to another worker node?Thats where the master comes in .
+
+The Master is another node with kubernetes installed in it and is configured as a master.
+
+The master watches over the nodes in the cluster and is responsible for actual orchestration of containers over the worker nodes.
+
+5. When you install kubernetes on a system , you are actually installing the following components
+
+- An API server
+- an etcd service
+- a Kublet service
+- a Container runtime
+- Controllers
+- Schedulers
+
+6. The API server acts as a frontend for the kubernetes service
+The users, management devices,command line interfaces, all talk to the API server to interact with the kubernetes cluster.
+
+7. Next is the etcd keystore . etcd is a distributed reliable key value store used by kubernetes to store all data used to manage the cluster.
+
+When you have multiple nodes and multiple masters in your cluster,etcd stores all that information on all the nodes in the cluster in a distributed manner.
+
+etcd is responsible for implementing locks within the cluster to ensure that there are no conflicts between the masters. 
+
+8. The Scheduler is responsible for distributing work or containers across multiple nodes.It looks for newly created containers and assigns them to nodes.
+
+9. The Controllers are the brain behind the orchestartion. They are responsible for noticing and responding when nodes,containers or end points goes down.
+The controllers makes decision to bring up new containers in such cases . The container runtime is the underlying software that is used to run containers.
+In our case that happens to be docker . But there are other options as well.
+
+10. Kublet is the agent that runs on each node in the cluster.The agent is responsible for making sure that containers are running on the node as expected.
+
+11. so far we saw two types of servers , Master and Worker, and a set of components that make up Kubernetes. But how are these components distributed across different types of servers?In other words how does one server become a master and the other the slave?
+
+- The worker node (also called minion) is where the containers are hosted.
+e.g Docker containers. And to run Docker containers on a system, we need container runtime installed and that's where the container runtime falls and in this case that happens to be docker. There are other container runtime also available such as Rocket or CRI-O
+
+- The master server has Kube API server and that is what makes it a master.
+Similarly, the worker nodes have kubelet agent that is responsible for interacting with a master to provide health information of the worker node and carry out actions requested by the Master on the worker nodes.All the information gathered are stored in a key value store on the master.
+The key value store is based on popular etcd framework.
+
+- The master also has the control manager and the scheduler .
+
+12 kubectl (called as Kube control)
+
+The kubectl tool is used to deploy and manage applications on a Kubernetes cluster. To get cluster information, to get status of otehr nodes in the cluster and manage many other things
+
+- The kubectl run command is used to deploy an application on the cluster.
+
+e.g kubectl run hello-minkube
+
+- The kubectl info command is used to view information about the cluster 
+
+e.g kubectl cluster-info
+
+- The kubectl get nodes command is used to list all nodes part of the cluster
+
+e.g kubectl get nodes
