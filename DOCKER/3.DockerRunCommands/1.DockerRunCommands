@@ -1,0 +1,78 @@
+1. to run a docker container with a different version
+
+docker run redis:4.0    // redis:4.0 is called a tag
+                        // this run a docker redis container with redis version 4.0
+
+2. if no version/tag is specified in docker run command , docker will consider latest version by default.
+
+3. By default docker runs in non-interactive mode , meaning by default docker container does not listen to a standard input.
+
+To run docker container in interactive mode , you can map standard input of your terminal to docker container with -i
+
+docker run -i kodekloud/simple-prompt-docker
+
+4. -i ---> interactive mode
+  -t ----> pseudo terminal
+
+  docker run -it kodekloud/simple-prompt-docker
+  
+5. Port Mapping on container
+
+docker run kodekloud/webapp
+
+* Running on http://0.0.0.0:5000
+
+now there are two ways to access this webapp running in containers on port 5000
+
+a)  You can access it by using the ip of docker container.Every docker container gets an ip assigned by default. This is an internal ip and only accessible from a docker host.
+
+If you are on docker host then we can open a browser from docker host and access http://172.17.0.2:5000 where 172.17.0.2 is an internal ip of the docker container and accessible only from docker host.
+
+b) Users outside of docker host cannot acces the webapp using the internal ip of docker container.
+
+For users outside of docker host will need to access using ip of docker host(let say 192.168.1.5) . But for that to work we must map the port 5000 in the docker container to a free port on docker host(let say port 80)
+
+docker run -p 80:5000 kodekloud/simple-webapp
+
+so now users outside of docker host can access the simple webapp at 192.168.1.5:80. All traffic on my docker host on port 80 will be routed to port 5000 inside docker container.
+
+This way you can run multiple instances of your application by mapping different ports on docker host
+
+docker run -p 8000:5000 kodekloud/simple-webapp
+docker run -p 8001:5000 kodekloud/simple-webapp
+
+6. Volume mapping
+
+How data is persisted in a docker container ?
+
+For eg - Lets say you were to run a mysql container.When databases and tables are created , the data files are stored in location /var/lib/mysql inside the docker container.
+Remember the docker container has it own isolated file system and any changes to any files happen within the container.
+
+Lets assume that you dumped a lot of data in the database. What happens if you were to delete the mysql container and remove it. As soon as you do it the container along with all  data inside it gets blown away , meaning all your data is gone.
+
+If you would like to persist data you would want to map a directory outside the container on the docker host to a directory inside the container.
+E.g create a directory /opt/datadir on docker host and map to /var/lib/mysql inside the docker container using the -v option . This way when a docker container runs it will implicitly mount the external directory to a folder inside the docker container.This way all your data will now be stored in an external volume at /opt/datadir directory and thus will remain even if you delete docker container.
+
+docker run -v /opt/datadir:/var/lib/mysql mysql
+
+7. docker inspect
+
+- docker ps command is good to get basic details about containers like name , ID but if you would like to see additional details about a specific container use docker inspect command.
+
+docker inspect <<Container name| container ID>>
+
+Docker inspect returns all details of container in json format such as state, mounts,configuration data,network settings etc.
+
+8. Container logs
+
+- How do we see the logs of a container we ran in the background/detached using -d parameter
+
+How do i view the logs which happens to be the contents written to the standard out of that container.
+
+docker logs <<container id/container name>>
+
+
+
+
+
+

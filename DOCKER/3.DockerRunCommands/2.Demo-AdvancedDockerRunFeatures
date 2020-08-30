@@ -1,0 +1,50 @@
+1. to check the version of ubuntu container
+
+docker run ubuntu cat /etc/*release*
+
+2. To run a particular version of ubuntu container
+
+docker run ubuntu:16.04 cat /etc/*release*
+
+3. to run docker container in detach mode or in background use -d parameter
+
+docker run -d ubuntu sleep 1500
+
+4. to bring a docker container running in detached mode in foreground use attach parameter
+
+docker attach <<container id>>
+
+5. run a jenkins server and access it 
+
+docker run jenkins
+
+- Two ways , either through internal ip of docker container which will be accessible only from docker host . To access jenkins server externally use docker host ip address
+
+- To find the internal ip of the docker container , u cam use docker inspect command to get the details of docker container
+
+docker inspect <<container id>>
+
+check the network settings field in the json details for ip address
+
+- to check the port on whcih jenkins is running run docker ps command to list running containers and see the port number
+
+
+http://172.17.0.2:8080
+
+- to do a port mapping container should be stopped 
+
+docker run -p 8080:8080 jenkins
+
+- to persist jenkins data like changes done to jenkins configuration when container is stopped
+
+a) create a directory in local machine
+
+- mkdir my-jenkins-data
+
+b) map the volume my-jenkins-data directory to jenkins directory(/var/jenkins_home) inside the jenkin container 
+
+docker run -p 8080:8080 -v ~/my-jenkins-data:/var/jenkins_home -u root jenkins  // running the command as user root
+
+
+
+

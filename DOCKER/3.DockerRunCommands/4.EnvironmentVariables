@@ -1,0 +1,10 @@
+1. To set an environment variable to be used by container use -e parameter
+
+docker run -e APP_COLOR=green simple-webapp-color
+
+2. Inspect environment variables
+
+- How do you find environment variables set on a container that is already running?
+
+• Use docker inspect command on the running container. Under the "Config" section , you will find a list of environment variables set on the container.
+

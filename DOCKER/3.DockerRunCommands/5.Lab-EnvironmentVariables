@@ -1,0 +1,53 @@
+1. Inspect the environment variables set on the running container and identify the value set to the APP_COLOR variable
+
+
+Run: docker inspect container-name/container-id, and look for the values under Env.
+
+
+ "Config": {
+            "Hostname": "fa15876ecbd9",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "8080/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "APP_COLOR=pink",
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "GPG_KEY=0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D",
+                "PYTHON_VERSION=3.6.6",
+                "PYTHON_PIP_VERSION=18.1"
+            ],
+            "Cmd": null,
+            "ArgsEscaped": true,
+            "Image": "kodekloud/simple-webapp",
+            "Volumes": null,
+            "WorkingDir": "/opt",
+            "Entrypoint": [
+                "python",
+                "app.py"
+            ],
+            "OnBuild": null,
+            "Labels": {}
+        }
+
+2. Run a container named blue-app using image kodekloud/simple-webapp and set the environment variable APP_COLOR to blue. Make the application available on port 38282 on the host. The application listens on port 8080.
+
+docker run -p 38282:8080 --name blue-app -e APP_COLOR=blue -d kodekloud/simple-webapp
+
+3. View the application by clicking the link HOST:38282 above your terminal and ensure it has the right color
+
+
+4. Deploy a mysql database using the mysql image and name it mysql-db.
+
+
+Set the database password to use db_pass123. Lookup the mysql image on Docker Hub and identify the correct environment variable to use for setting the root password.
+
+docker run -d -e MYSQL_ROOT_PASSWORD=db_pass123 --name mysql-db mysql
