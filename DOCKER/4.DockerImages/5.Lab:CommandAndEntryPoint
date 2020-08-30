@@ -1,0 +1,36 @@
+1. What is the ENTRYPOINT configured on the mysql image?
+
+Open the file /root/Dockerfile-mysql and inspect the ENTRYPOINT instruction
+
+
+2. What is the CMD configured on the wordpress image?
+
+
+Open the file /root/Dockerfile-wordpress and inspect the CMD instruction
+
+
+3. What is the final command run at startup when the wordpress image is run. Consider both ENTRYPOINT and CMD instructions
+
+ENTRYPOINT + CMD
+
+
+4. What is the command run at startup when the ubuntu image is run?
+
+Ans : Check CMD and ENTRYPOINT
+
+the current dockerfile has only command instruction specified as bash
+
+5. Run an instance of the ubuntu image to run the sleep 1000 command at startup
+
+
+Run it in detached mode.
+
+docker run -d ubuntu sleep 1000
+
+
+
+
+
+
+
+

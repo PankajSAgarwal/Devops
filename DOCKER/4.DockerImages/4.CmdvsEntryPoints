@@ -1,0 +1,142 @@
+1. docker run ubuntu
+
+- The above command runs an instance of ubuntu and exits immediately
+You can check by running command docker ps, you wouldn't see container running.
+
+if u run docker ps -a , you will see new container in exited state.
+
+why is that ?
+
+2. Unlike VM , container are not meant to host OS. Containers are meant to run a specific task or process such as to host an instance of a webserver or application server or a database or simply to carry out some kind of computation or analysis. Once the task is complete the container exits , the container only lives as long as the process inside it is alive.
+If the webservice inside the container crashes or is stopped , container exits.
+
+3. So who defines what process is run within the container ?
+
+If you look at the docker file of the popular Docker images like nginx , you will see an instruction called cmd which stands for command that defines the program that will be run within the container when it starts .
+
+- for the nginx image,it is the nginx comand
+# Define the default command
+
+CMD["nginx"]
+
+for mysql image it is the mysqld command
+
+CMD["mysqld"]
+
+- What we tried to do earlier was to run a container with  a plain ubuntu OS.
+The dockerfile for this image uses bash as default command
+
+#Define default command
+CMD["bash"]
+
+Now bash is not a process like your webserver or database server. It is a shell that listens for inputs from a terminal. If it cannot find a terminal, it exits.
+
+When we ran the ubuntu container earlier , docker created a container from the ubuntu image and launched the bash program. By default Docker does not attach a terminal to a container when it is run. And so the bash program doesnot find the terminal and so it exits. Since the process that was started  when the container was created finished, the container exits as well.
+
+4. One option is to append a command to the docker run command and that way it overrides the default command specified with in the image.
+
+e.g docker run ubuntu [command]
+
+docker run ubuntu sleep 5
+
+this way when the container starts , it runs the sleep program waits for 5 seconds and then exits.
+
+But how do u make the change permanent
+
+5. Say you want to run sleep command when ubuntu container starts
+
+You would create a new image from teh base ubuntu image and specify in new command
+
+FROM ubuntu
+CMD sleep 5
+
+- There are different ways to specify the command , either the command simply as is in a shell form or in a JSON array format
+
+CMD command param1 
+e.g CMD sleep 5
+
+CMD["command","param1"]
+e.g CMD["sleep","5"]
+
+Remember when you specify in json array format like above, the first element in the array should be executable. 
+
+The below format is wrong 
+
+CMD["sleep 5"] // the command and its parameters should be seperate element in the list.
+
+- I can now build a new image using the docker build command and name it as ubuntu sleeper
+
+docker build -t ubuntu-sleeper
+
+docker run ubuntu-sleeper // ~ docker run ubuntu sleep 5
+
+6. Scenario : if i need to change the time to sleep from 5 to 10 ,
+
+one way is to append  command like below
+
+docker run ubuntu-sleeper sleep 10
+
+but i would like to just specify 10 and image should automatically pick up sleep command , how can that be done ?
+
+e.g docker run ubuntu-sleeper 10
+
+Ans: Through ENTRYPOINT
+
+FROM Ubuntu
+ENTRYPOINT ["sleep"]
+
+7. The Entrypoint instruction is similar to command instruction as in you can specify the program that will be run  when the container starts and whatever you specify on the command line, in this case 10 will be appended to the entry point.
+
+FROM Ubuntu
+ENTRYPOINT ["sleep"]
+
+
+Command at start up : sleep 10
+
+8. CMD vs ENTRYPOINT
+
+In case of CMD instruction the command line parameters passed will get replaced entirely  whereas in case of entry point the comamnd line paramater will get appended.
+
+9. Now in the second case what if i run the Ubuntu sleeper image command without appending the number of seconds then the command at startup will be just sleep and you get the error that the operand is missing
+
+docker run ubuntu-sleeper
+
+o/p : sleep missing operand
+
+10. How do you configure a default value for command , if one was not specified in the command line. That's where you will use both ENTRYPOINT as well as CMD instruction.
+
+FROM Ubuntu
+
+ENTRYPOINT ["sleep"]
+
+CMD["5"]
+
+Command at startup: sleep 5
+
+In this case command instruction will be appended to the ENTRYPOINT instruction. So at startup command will be sleep 5 if you didnt specify any parameters in the command line. If you did then that will override the command instruction.
+
+Remember for this to happen you should always specify the entry point and command instructions in a JSON format .
+
+e.g docker run ubuntu-sleeper 10
+
+command at startup: sleep 10
+
+11. Finally if you really really want to modify the entry point during runtime say from sleep to an imaginary sleep2.0 command.
+
+you can override using the --entrypoint option in the docker run command
+
+
+e.g docker run --entrypoint sleep2.0 ubuntu-sleeper 10
+
+command at start up: sleep2.0 10
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,101 @@
+1. Why to create my own docker image ?
+
+Reasons
+- you cannot find a component or service that you want to use as part of your application on  docker hub already
+- Or need to dockerise my custom app for ease of shipping and deployment
+
+2. Scenraio : Containerize a simple webapplication built on python flask framework
+
+Steps for manually deploying the application
+
+1. OS - ubuntu
+2. Update apt repo
+3. Install dependencies using apt
+4. Install python dependencies using pip
+5. copy source code to /opt folder
+6. Run the web server using "flask" command
+
+Now that you have the steps , create a dockerfile using these
+
+3. Overview of process of creating your own image
+
+a. create a docker file name Dockerfile and write down the instructions for setting up your application in it such as installing dependencies , where to copy the source code from and to , and what the entry point of the application is etc. 
+b. Once done build your image using the docker built command and specify the dockerfile as input as well as tag name for the image.
+- This will make the image locally available on your system
+c. To make it available on public Docker Hub registry, run the docker push command and specify the name of the image you just created
+
+
+// Step a
+Dockerfile
+
+FROM Ubuntu
+
+RUN apt-get update
+RUN apt-get install python
+
+RUN pip install flask
+RUN pip install flask-mysql
+
+COPY . /opt/source-code
+
+ENTRYPOINT FLASK_APP=/opt/source-code/app.py flask run
+
+// Step b
+docker build Dockerfile -t 2005pank/my-custom-app      // 2005pank is docker 
+                                                       //hub account name 
+// Step c
+docker push 2005pank/my-custom-app       // 2005pank is docker hub account name
+
+4. Dockerfile
+
+- Dockerfile is a text file written in a specific format that docker can understand. It is in an instruction and argument format . For e.g everything on the left in CAPS is instructions
+
+Each of these instruct docker to perfrom a specific action while creating the image.
+
+Everything on the right is an argument to those instructions.
+
+Every Docker image should be based off on another image.Either an OS or another image that was created before based on an OS
+
+**** It is important to note that all docker files must start with a FROM instruction.
+
+**** RUN instructions instruct Dockert to run a particular command on thos base images.
+
+**** ENTRYPOINT allows us to specify a command that will be run when the image is run as container.
+
+
+Dockerfile
+INSTRUCTION       ARGUMENT
+
+Dockerfile
+FROM  Ubuntu                          //Start from a base OS or another image.
+
+RUN apt-get update
+RUN apt-get install python
+
+RUN pip install flask
+RUN pip install flask-mysql
+
+COPY . /opt/source-code
+
+ENTRYPOINT FLASK_APP=/opt/source-code/app.py flask run
+
+5. Layered Architecture
+
+- When docker builds the images , it builds these in a layered architecture
+- Each line of instructions created a new layer in the dcoker image with just the changes from the previous layer.
+
+For e.g The first layer is a base Ubuntu OS followed by the second instruction that creates a second layer which installs all the apt packages and then third instruction creates a third layer with the python packages followed by fourth layer that copies source code over and the final layer that updates the entry point of the image.
+
+- Since each layer only stores the changes from the previous layer it is reflected in the size as well.
+
+- You could see this information if you run the docker history command followed by the image name.
+
+- When you run the docker build command , you could see the various steps involved and result of each task.
+
+- All the layers build are cached so the layered architecture helps you to restart docker build from that particular step in case it fails or if you were to add new steps in the build process , you wouln't have to start all over again
+
+Layer 1 - Base Ubuntu layer                           // 120 MB
+Layer 2 - Changes in the apt packages                 // 306 MB
+Layer 3 - Changes in pip packages                     // 6.3 MB
+Layer 4 - Source code                                 // 229 B
+Layer 5 - Update Entrypoint with "flask" command      // 0 B

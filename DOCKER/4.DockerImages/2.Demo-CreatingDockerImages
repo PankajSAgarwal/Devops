@@ -1,0 +1,116 @@
+1. Start the ubuntu container in an interactive mode as well as attach terminal in bash mode , so that we can work on when the conatiner is up
+
+docker run -it ubuntu bash
+
+2. Update the package index
+
+apt-get update
+
+3. Install python
+
+apt-get install -y python
+
+4. check python version
+
+python
+
+5. install pip
+
+apt-get install python-pip
+
+6. Install flask dependencies
+
+pip install flask
+
+7. Source code
+
+cat > /opt/app.py
+
+import os
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def main():
+    return "Welcome!"
+
+@app.route('/how are you')
+def hello():
+    return 'I am good, how about you?'
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)
+
+8. Start the web server
+
+
+FLASK_APP=/opt/app.py flask run --host=0.0.0.0
+
+9. To access the application on webserver
+
+http://172.17.0.2:5000        // 172.17.0.2 is the internal ip of the container
+
+10. How to containerize this steps
+
+Step 1: Run manually each step
+Step 2 : Note down the steps in a notepad from history command 
+
+apt-get update
+apt-get install -y python
+apt-get install python-pip
+pip install flask
+create/copy application source code to /opt/app.py
+FLASK_APP=/opt/app.py flask run --host=0.0.00
+
+Step 3 : Create a directory where Dockerfile will be created
+
+mkdir my-simple-webapp
+cd my-simple-webapp
+
+Step 4 : Create a Dockerfile in  my-simple-webapp directory
+
+cat > Dockerfile
+
+FROM ubuntu
+
+RUN apt-get update
+RUN apt-get install -y python python-pip
+RUN pip install flask
+
+COPY app.py /opt/app.py
+ENTRYPOINT FLASK_APP=/opt/app.py flask run --host=0.0.0.0
+
+Step 5 : docker build . -t 2005pank/my-simple-webapp // 2005pank is the docker 
+                                                     //hub account name 
+
+Step 6: Check if image is available in local system
+
+docker images
+
+Step 7: Test the image locally
+
+docker run my-simple-webapp
+
+http://172.17.0.2:5000
+
+Step 8: Push the image to docker hub
+
+before pushing to docker registry ensure your image name is taggeded to your account . If not then rebuild ur image tagged to your docker hub account name
+
+docker build . -t 2005pank/my-simple-webapp
+
+// login to docker registry
+
+docker login
+
+username:2005pank
+
+// docker push
+
+docker push 2005pank/my-simple-webapp
+
+docker push
+
+
+
+

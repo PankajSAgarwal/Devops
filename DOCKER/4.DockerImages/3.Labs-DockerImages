@@ -1,0 +1,92 @@
+1. How many images are available on this host?
+
+Run the command docker images and count the number of available images.
+
+
+2. What is the size of the Ubuntu image?
+
+
+Run the command docker images and look under the SIZE column
+
+
+3. We just pulled a new image. What is the tag on the newly pulled NGINX image?
+
+Run the docker images command and look for the TAG column
+
+
+4. We just downloaded the code of an application. What is the base image used in the Dockerfile?
+
+
+Inspect the Dockerfile in the webapp-color directory.
+
+
+You can either open the file using vi /root/webapp-color/Dockerfile (or using comamnds such as cat/more/less/vim e.t.c) and look for the FROM instruction or search for it directecly using grep -i FROM /root/webapp-color/Dockerfile
+
+
+5.To what location within the container is the application code copied to during a Docker build?
+
+
+Inspect the Dockerfile in the webapp-color directory.
+
+
+Open the Dockerfile and look for COPY command
+
+
+6.When a container is created using the image built with this Dockerfile, what is the command used to RUN the application inside it.
+
+
+Inspect the Dockerfile in the webapp-color directory.
+
+Open the Dockerfile and look for ENTRYPOINT command
+
+
+7.What port is the web application run within the container?
+
+
+Inspect the Dockerfile in the webapp-color directory.
+
+Open the Dockerfile and look for the port in EXPOSE command
+
+
+8. Build a docker image using the Dockerfile and name it webapp-color. No tag to be specified.
+
+docker build -t webapp-color
+
+9. Run an instance of the image webapp-color and publish port 8080 on the container to 8282 on the host.
+
+
+docker run -p 8282:8080 webapp-color
+
+10:What is the base Operating System used by the python:3.6 image?
+
+
+If required, run an instance of the image to figure it out.
+
+Run docker run python:3.6 cat /etc/*release* command
+
+10. What is the approximate size of the webapp-color image?
+
+
+Run docker images command and look under SIZE
+
+
+11. Build a new smaller docker image by modifying the same Dockerfile and name it webapp-color and tag it lite.
+
+
+Hint: Find a smaller base image for python:3.6. Make sure the final image is less than 150MB.
+
+Modify Dockerfile to use python:3.6-alpine image, and then build using docker build -t webapp-color:lite .
+
+12. Run an instance of the new image webapp-color:lite and publish port 8080 on the container to 8383 on the host.
+
+
+docker run -p 8383:8080 webapp-color:lite
+
+
+
+
+
+
+
+
+
