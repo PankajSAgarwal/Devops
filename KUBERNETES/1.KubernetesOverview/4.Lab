@@ -1,0 +1,33 @@
+1. Let's get familiar with the lab environment. How many nodes are part of the cluster?
+
+Hint :Run the kubectl get nodes command and count the number of nodes.
+
+Ans output
+
+master $ kubectl get nodes
+NAME      STATUS    ROLES     AGE       VERSION
+master    Ready     master    3h        v1.11.3
+node01    Ready     <none>    3h        v1.11.3
+
+Ans 2 nodes
+
+2. What is the version of Kubernetes running on the nodes
+
+
+Hint : Run the kubectl get nodes command and inspect the Version column.
+master $ kubectl get nodes
+NAME      STATUS    ROLES     AGE       VERSION
+master    Ready     master    3h        v1.11.3
+node01    Ready     <none>    3h        v1.11.3
+
+Ans : v1.11.3
+
+3. What is the flavour and version of Operating System on which the Kubernetes nodes are running?
+
+Hint:Run the kubectl get nodes -o wide command and view the OS-IMAGE column.
+
+master $ kubectl get nodes -o wide
+NAME      STATUS    ROLES     AGE       VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE    KERNEL-VERSION     CONTAINER-RUNTIMEmaster    Ready     master    3h        v1.11.3   172.17.0.70   <none>        Ubuntu 16.04.2 LTS   4.4.0-62-generic   docker://1.13.1
+node01    Ready     <none>    3h        v1.11.3   172.17.0.73   <none>        Ubuntu 16.04.2 LTS   4.4.0-62-generic   docker://1.13.1
+
+Ans : Ubuntu 16.04.2 LTS
