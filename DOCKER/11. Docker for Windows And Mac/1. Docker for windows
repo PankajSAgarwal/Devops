@@ -1,0 +1,43 @@
+1. Docker tool box
+
+  • Oracle VirtualBox
+  • Docker Engine
+  • Docker Machine
+  • Docker Compose
+  • Kitematic GUI
+
+  Supports 64 bit OS, Windows 7 or higher and virtualization is enabled
+
+  This is legacy
+
+2. Docker Desktop for windows
+
+In this we remove Oracle virtualnox and use microsoft native virtualization technology available with windows called Microsoft Hyper-V
+
+Because of dependency on Hyper-V , this is supported only for Windows 10 enterprise or professional edition and on Windows server 2016 , because both these operating systems comes with Hyper-V support by default.
+
+
+3. *** Note : Both Docker toolbox and Docker Desktop for Windows will help run a linux container on a windows host. This does not include windows applications or windows images or windows containers.
+
+With Windows server 2016 , microsoft announced support for Windows Container for the first time. You can now package applications , Windows applications into Windows docker containers and run them on Windows docker host using  Docker desktops for windows
+
+4. When you install Docker Desktop for Windows , Default option is for Linux containers.You must explicitly configure Docker to switch to Windows containers if you would like to use Windows containers.
+
+5. Unlike Linux ,  there are two types of containers in windows
+
+a) A windows server container which works exactly like linux containers where the OS kernel is shred with the underlying OS
+
+b) To allow better security boundary between containers and to allow kernels with different versions and configuration co-exist, hype-v isolation was introduced.
+
+In Hyper-V isolation each container is run within a highly optimized virtual machine guaranteeing complete kernel isolation between the containers and the underlying host.
+
+Unlike linux world where we have different options to specify like Ubuntu,fedora,centos etc , in windows we have two options only
+
+• Windows Server Core
+• Nano server
+
+A nano server is a headless deployment option for windows server which runs at a fraction of size of the full operating system
+
+Windows server core is not a light as you might expected it to be .
+
+*** Note : VirtualBox and Hyper-V cannot coexist together on the same machine.
