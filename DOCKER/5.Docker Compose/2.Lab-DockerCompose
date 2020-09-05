@@ -1,0 +1,41 @@
+1. First create a postgress database container called db, image postgres, environmental variable POSTGRES_PASSWORD=mysecretpassword
+
+
+docker run --name db -e POSTGRESS_PASSWORD=mysecretpassword -d postgres
+
+2. Next let's create a simple wordpress container called wordpress, image: wordpress, link it to the container db and expose it on host port 8085
+
+
+docker run --name=wordpress --link db:db -p 8085:80 -d wordpress
+
+docker run -d --name=wordpress --link db:db -p 8085:80 wordpress
+
+3. Let's clean up the actions carried out in previous steps. Delete the db and wordpress containers.
+
+docker stop <<container id of db>> <<container id of wordpress>>
+
+docker rm <<container id of db>> <<container id of wordpress>>
+
+4. Create a docker-compose.yml file under the path /root/wordpress. Once done, run a docker-compose up.
+
+
+The compose file should have exact specification of the wordpress and db container
+
+
+Ans : docker-compose.yml
+
+services:
+  db:
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+    image: postgres
+  wordpress:
+    image: wordpress
+    links:
+    - db
+    ports:
+    - 8085:80
+version: '3.0'
+
+
+Note : Make sure there are no extra lines or spaces after version: '3.0'
