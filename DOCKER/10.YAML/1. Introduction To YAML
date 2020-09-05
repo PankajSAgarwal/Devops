@@ -1,0 +1,198 @@
+1. A YAML file is used to represent data
+2. Repesentation of data in XML , JSON and YAML
+
+
+XML:
+
+<Servers>
+  <Server>
+    <name>Server1</name>
+    <owner>John</owner>
+    <created>12232012</created>
+    <Status>Active</Status>
+  </Server>
+</Servers>
+
+JSON:
+
+{
+  Servers: [
+    {
+      name: Server1,
+      owner: John,
+      created: 12232012,
+      status: Active
+    }
+  ]
+}
+
+YAML
+
+Servers :
+  -     name: Server1
+        owner: John
+        created: 12232012
+        status: Active
+
+3. Key value pair in YAML
+
+Fruit: Apple
+Vegetable: Carrot
+Liquid: Water
+Meat: Chicken
+
+Note : a space is required in between key and value pair .
+
+4. Array/Lists
+
+Fruits:
+- Orange
+- Apple
+- Banana
+
+Vegetables:
+- Carrot
+- Cauliflower
+- Tomato
+
+Dash(-) indicates it is an element of an array
+
+5. Dictionary
+
+- is a set of properties grouped together under an item
+
+Banana:
+   Calories: 1
+   Fat: 0.4 g
+   Carbs: 27 g
+
+Grapes:
+   Calories: 62
+   Fat: 0.3 g
+   Carbs: 16 g
+
+Notice the blank space before each item.
+You must have equal number of blank spaces before the properties of a single item, so they are all aligned together
+
+6.Blank spaces in YAML
+
+a) 
+Banana:
+   Calories: 1
+   Fat: 0.4 g
+   Carbs: 27 g
+
+The example above indicates Calories,Fat and Carbs are properties of Banana
+
+b) 
+
+Banana:
+   Calories: 105
+    Fat: 0.4 g
+    Carbs: 27 g
+
+This format indicates Calories is a property of banana but Fat and Carbs are properties of calories(which doesnt make sense)
+
+This will also give a syntax error which will indicate mapping values are not allowed here as Calories is already set to a value 105.
+
+You can either set a direct value or a hash map but not both.
+
+** Note: Number of spaces before each property is key in YAML
+
+7. You can have list containing dictionary containing lists.
+
+Fruits:
+  - Banana:
+      Calories: 105
+      Fat: 0.4 g
+      Carbs: 27 g
+  
+  - Grape:
+      Calories: 62
+      Fat: 0.3 g
+      Carbs: 16 g
+
+In this case i have a list of fruits and elements of the list are banana and grapes. But each of these elements are further dictionaries containing nutrition information.
+
+8. Dictionary vs List vs List of dictionaries
+
+-> To store different properties of a single object , we use dictionary
+e.g a car can have properties like Color,price, Transmission,Model
+
+Dictionary
+
+Color: Blue
+Model: Corvertte
+Transmission: Manual
+Price: $20,000
+
+-> If we need to split model with name and year then we can have dictionary within another dictionary
+
+Dictionary within a dictionary
+
+Color: Blue
+Model: 
+  Name: Corvertte
+  Year: 1995
+Transmission: Manual
+Price: $20,000
+
+-> Let say we would like to store the names of 6 cars . The names are formed by the color and the model of the car
+
+List
+
+- Blue Corvertte
+- Grey Corvertte
+- Red Corvertte
+- Green Corvertte
+- Blue Corvertte
+- Black Corvertte
+
+List of dictionaries
+
+- Color: Blue
+  Model:
+    Name: Corvertte
+    Year: 1995
+  Transmission: Manual
+  Price: $20,000
+
+- Color: Grey
+  Model:
+    Name: Corvertte
+    Year: 1995
+  Transmission: Manual
+  Price: $10,000
+
+- Color: Blue
+  Model:
+    Name: Corvertte
+    Year: 1995
+  Transmission: Manual
+  Price: $12,000
+
+9. Dictionary is an un-ordered collection whereas list is an ordered collection
+
+Dictionary 1                                    Dictionary 2
+
+Banana:                                           Banana:
+  Calories: 105                                     Calories: 105
+  Fat: 0.4 g                                        Carbs: 27 g
+  Carbs: 27 g                                       Fat: 0.4 g
+
+Both dictionaries are same even if dictionary 2 has order of Fat and carb changed . As longs as all properties value match of two dictionaries , dictionary is considered equal even if order of property is changed.
+
+Arrays/List
+
+List 1                                                      List 2
+
+#List of fruits                                           #List of fruits
+
+Fruits:                                                     Fruits:  
+  - Orange                                                    - Orange
+  - Apple                                                     - Apple
+  - Banana                                                    - Banana
+
+  The baove two list are not same as in a list order matters
+
+10. # is the comment character in a YAML file.
