@@ -1,0 +1,21 @@
+1. Container Orchestration
+
+It is a solution that consists of a set of tools and scripts that can help host containers in a production environment.
+
+Typically a container orchestration solution consists of multiple Docker hosts that can host containers
+
+docker service create --replicas=100 nodejs
+
+Container orchestration allows you to deploy hundreds or thousands instances of your application with a single command.
+
+Some orchestration technology  automatically scale up number of instances when users increase and scale down the number of instances when the demand decreases.
+Some solutions can even help in automatically add additional hosts to support the user load.
+
+Not just clustering and scaling the container orchestartion solutions, also provide support for advanced networking between containers across different hosts as well as load balancing users request across different hosts.
+They also provide support for sharing storage between different hosts as well as support for configuration management and security within the cluster.
+
+2. container orchestration solution
+
+- Docker swarm from Docker
+- Kubernetes from google
+- Mesos from Apache

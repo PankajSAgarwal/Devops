@@ -1,0 +1,110 @@
+1. With docker run cli you can run a single instance of an application,
+
+with kubernetes cli called as Kubectl you can run thousands of instances of a single application with a single command
+
+• kubernetes scale --replicas=1000 my-web-server
+
+2. Kubernetes can also be configured so that instances and infrastructure itself can  scale up and down based on user load.
+
+3. Kubernetes can upgrade these 1000s of instances of the application in a rolling upgrade fashion, one at a time with a single command
+
+• kubectl rolling-update my-web-server --image=web-server:2
+
+4. If something goes wrong, it can roll back changes with a single command
+
+• kubectl rolling-update my-web-server --rollback
+
+5. Kubernetes can help test new features of your application by only upgrading a percentage of these instances through AB testing methods.
+
+6. What is the relationship between Docker and Kubernetes
+
+Kubernetes uses docker hosts to host applications in the form of Docker containers
+
+7. Kubernetes architecture
+
+- Kubernetes cluster consists of a set of nodes
+- The node is a machine physical or virtual on which a Kubernetes , the kubernetes software - a set of tools are installed .
+
+- A node is a worker machine and that is where containers will be launched by kubernetes.
+
+- Nodes are also called as minions.
+
+8. What if node on which application is running fails ?
+
+Obviously application goes down , so we need to have more than one node.
+
+A cluster is a set of nodes grouped together.This way even if one node fails , you  have your application still accessible from the other nodes.
+
+9. Who is responsible for managing the kubernetes cluster ?
+
+Where is the information about the members of the cluster stored ?
+
+How are the nodes monitored when a node fails ?
+
+How do you move the workload of a failed node to another worker node .
+
+- That is where the master comes in.
+
+- Master is a node where the kubernetes control plane components is installed.
+The master watches over the nodes in the cluster and is responsible for the actual orchestration of containers on the worker nodes.
+
+10. When you install kubernetes on a system , you are actually installing the following components
+
+- An API server
+- an etcd server
+- a kubelet service
+- container runtime engine like docker 
+- and a bunch of controllers 
+- and a scheduler
+
+11. The API server acts as a frontend for the kubernetes. The user's management devices , the command line interfaces , all talk to API server to interact with the Kubernetes cluster.
+
+12. etcd server 
+
+- etcd is a key value store.
+
+- etcd is a distibuted reliable key value store used by kubernetes to store all data used to manage the cluster 
+
+- When you have multiple nodes and multiple masters in your cluster , etcd stores all that information on all the nodes in the cluster in a distributed manner.
+
+- etcd is responsible for implementing logs within the cluster to ensure there are no conflicts between the masters
+
+13. Scheduler
+
+- is responsible for distributing work or containers across multiple nodes.
+- It looks for newly created containers and assigns them to nodes
+
+14 . The controllers
+
+- are the brain behind the orchestration.
+- They are responsible for noticing and responding when nodes, containers or endpoints goes down 
+- The controllers makes decision to bring up new containers in such cases
+
+15 The container runtime
+
+- is the underlying software that is use to run containers. In our case it happens to be docker 
+
+16 Kubelet
+
+- is the agent that runs on each node in the cluster .
+- the agent is responsible for making sure that the containers are running on the nodes as expected.
+
+17. kubectl
+
+- a command line utility
+- is the kubernetes CLI that is used to deploy and manage applications on a kubernetes clusters to get cluster related information, to get the status of nodes in the cluster and many other things
+- the kubectl run command is used to deploy an application on the cluster
+
+• kubectl run hello-minikube
+
+- the kubectl clsuter info command is used to view information about the cluster 
+
+• kubectl cluster info
+
+- To list all nodes part of the cluster 
+
+• kubectl get nodes
+
+- To run 100s of instances of your application across 100s of nodes , 
+
+kubectl run my-web-app --image=my-web-app --replicas=100

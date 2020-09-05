@@ -1,0 +1,44 @@
+1. Docker swarm
+
+- Combine multiple docker machines together into a single cluster .
+- Docker swarm will take care of distributing your services or your application instances into seperate hosts for high availability and load balancing across different systems and hardware.
+
+2. To set up docker swarm
+
+- you must have multiple docker hosts with docker installed on them
+- Designate one host as the "manager" or "master" or the "swarm master" and others are slaves or workers
+- Once you are done with that run the docker swarm init command on the swarm manager and that will initialize the swarm manager
+
+• docker swarm init
+
+- The output will also provide command to be run on the workers .
+So copy the command and run it on the worker nodes to join the manager.
+
+docker swarm join --token <token>
+
+- After joining the swarms the workers are also referred as the nodes 
+
+- You are now ready to create services and deploy to swarm clusters
+
+3. How do i utilize my cluster to run multiple instances
+
+- One way to do would be to run the docker run command on each worker node.
+But that is not ideal.
+
+- The Docker swarm orchestration is what we need here.
+
+- The key component of Docker swarm is the Docker service.
+
+- Docker services are one or more instances of a single application or service that runs across the nodes in the swarm cluster.
+
+for example , i can create a docer service to run multiple instancesof my web server application across the worker nodes in my swarm cluster.
+
+For this i run the docker service create command on the manager node and specify my image name there which is my web server in this case and use the option replicas to specify the number of instances of my web server , i would like to run across the cluster.
+
+• docker service create --replicas=3 my-web-server
+
+Since i specified 3 replicas , i get 3 instances of my web server distributed across the worker nodes .
+
+
+*** Note : Remember Docker service command needs to be run on the manager node and not on worker nodes.
+
