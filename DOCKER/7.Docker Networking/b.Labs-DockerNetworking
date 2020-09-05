@@ -1,0 +1,161 @@
+1. Explore the current setup and identify the number of networks that exist on this system
+
+
+Hint : docker network ls
+
+Ans: docker network ls
+
+output: 
+
+NETWORK ID          NAME                DRIVER              SCOPE
+dd02dc768363        bridge              bridge              local
+fb9c1a74a365        host                host                local
+e32948a8d350        none                null                local
+
+2. What is the ID associated with the bridge network?
+
+Hint: 
+Command : docker network ls
+
+3. We just ran a container named alpine-1. Identify the network it is attached to.
+
+
+Hint:
+
+Run the command docker inspect alpine-1 and look under the Networks section.
+
+a) bridge b) host c) none
+
+
+Ans:
+
+b) host 
+docker inspect alpine-1
+
+"NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "df5ab4c7dea417af4d5c867bf10aef69d9da793333b58e14e44f82329d3a5a1b",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {},
+            "SandboxKey": "/var/run/docker/netns/default",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "",
+            "Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "MacAddress": "",
+            "Networks": {
+                "host": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "fb9c1a74a36514f6f2d767eee7be024a0ffd40b6cf208886de42ee8003f5a6a6",
+                    "EndpointID": "2a6d841fefce0bdc9c520fc8a900259605e96f61488f77600985e2e71ea98194",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "",
+                    "DriverOpts": null
+                }
+            }
+
+3. What is the subnet configured on bridge network?
+
+
+Run the command docker network inspect bridge
+
+
+Ans: "Subnet": "172.18.0.1/24",
+
+docker network inspect bridge
+
+[
+    {
+        "Name": "bridge",
+        "Id": "dd02dc76836326bccb4579a81b9b659c67aeae061e882d7ba2c9059241181e9b",
+        "Created": "2020-09-05T13:15:06.551692189Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.18.0.1/24",
+                    "Gateway": "172.18.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {
+            "com.docker.network.bridge.default_bridge": "true",
+            "com.docker.network.bridge.enable_icc": "true",
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
+            "com.docker.network.bridge.name": "docker0",
+            "com.docker.network.driver.mtu": "1500"
+        },
+        "Labels": {}
+    }
+]
+
+4. Run a container named alpine-2 using the alpine image and attach it to the none network.
+
+Hint: Command: docker run --name alpine-2 --network=none alpine
+
+
+Ans
+
+docker run --name alpine-2 --network=none alpine
+
+5. Create a new network named wp-mysql-network using the bridge driver. Allocate subnet 182.18.0.1/24. Configure Gateway 182.18.0.1
+
+Hint : docker network create --driver bridge --subnet 182.18.0.1/24 --gateway 182.18.0.1 wp-mysql-network
+
+
+Ans : docker network create --driver bridge --subnet 182.18.0.1/24 --gateway 182.18.0.1 wp-mysql-
+
+6. Deploy a mysql database using the mysql:5.6 image and name it mysql-db. Attach it to the newly created network wp-mysql-network
+
+
+Set the database password to use db_pass123. The environment variable to set is MYSQL_ROOT_PASSWORD
+
+Hint: Command: docker run -d -e MYSQL_ROOT_PASSWORD=db_pass123 --name mysql-db --network wp-mysql-network mysql:5.6
+
+Ans:
+
+docker run -d -e mysql-db MYSQL_ROOT_PASSWORD=db_pass123  --name mysql-db --network wp-mysql-network mysql:5.6
+
+7. Deploy a web application named webapp, using image kodekloud/simple-webapp-mysql. Expose port to 38080 on the host. The application takes an environment variable DB_Host that has the hostname of the mysql database. Make sure to attach it to the newly created network wp-mysql-network
+
+Hint: Command: 
+
+docker run --network=wp-mysql-network -e DB_Host=mysql-db -e DB_Password=db_pass123 -p 38080:8080 --name webapp --link mysql-db:mysql-db -d kodekloud/simple-webapp-mysql
+
+Tests:
+Name: webapp
+Image: kodekloud/simple-webapp-mysql
+Env: DB_Host=mysql-db
+Network: wp-mysql-network
+
+
+
+
+

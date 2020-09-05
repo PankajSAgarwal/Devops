@@ -1,0 +1,66 @@
+1. When you install docker it creates 3 networks automatically
+- bridge
+- none
+- host
+
+2. Bridge is the default network a container gets attached to.
+3. If you would like to associate the container with any other network you specify the network information using the network command line parameter like this.
+
+bridge
+  docker run ubuntu
+
+none
+  docker run Ubuntu --network=none
+
+host
+  docker run Ubuntu --network=host
+
+4. Bridge network
+  - private internal network created by Docker on the host.
+  - All containers attached to this network by default and they get an internal IP address usually in the range 172.17 series . The containers can access each other using the internal IP if required . 
+  - To access any of these containers from the outside world , map the ports of these containers to ports of the docker host as we have seen before
+  - Another way to access these containers externally is to associate the container to the host network. This takes out any network isolation between the docker host and the docker container.Meaning if you were run a web server on port 5000 in a web container, it is automatically accessible on the same port externally without requiring any port mapping as the web container uses the host network.
+
+  This would also mean that unlike before you will now not be able to run multiple web containers on the same host on the same port as the ports are now common to all containers in the host network.
+
+5. None network
+
+- The containers are not attached to any network and doesnt have access to the external network or other containers.They run in an isolated network
+
+6. User-defined network
+
+We wish to isolate network , e.g first two continers on internal 172 network and second two containers on a different internal network 182
+
+By default Docker only creates one internal bridge network
+
+We could create our own internal network using the command Docker network create and specify the driver which is bridge in this case and the subnet for that network followed by the custom isolated network name.
+
+• docker network create --driver bridge --subnet 182.18.0.0/16 custom-isolated-network
+
+6. To list all networks
+
+docker network ls
+
+7. How do we see the network settings and IP addresses assigned to an existing container
+
+docker inspect <<container id>>|<<container name>>
+
+Check the NetworkSettings section in the output json .
+
+8. Embedded DNS
+
+Containers can reach each other using their names
+
+For example , i have a webserver and a mysql database container running on the same node . How can i get my webserver to access the database on the database container ?
+
+- One thing i can do is to use the internal ip addres assigned to the MYSQL container which in this case is 172.70.0.3 but that is not very ideal because it is not guaranteed that the container will get the same ip when the systen reboots .
+
+- Right way to do it is to use container name.
+
+All containers in a docker host can resolve each other with the name of the container . Docker has a built in DNS server that helps the containers to resolve each other using the container name.
+
+Note that the built in DNS server always runs at address 127.0.0.11.
+
+9. How does docker implements networking?
+
+Docker uses network namespaces that creates seperate namespaces for each container. It then uses virtual ethernet pairs to connect containers together 
