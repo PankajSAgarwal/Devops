@@ -1,0 +1,52 @@
+1. Docker Registry
+
+It is a central repository of all docker images.
+
+2. docker run nginx ~~ docker run nginx/nginx
+
+first nginx - use account
+second nginx - image repository
+
+if no user account is provided, docker considers user account name to be same as the image name
+
+3. Docker hub at docker.io is the default image repository
+
+image:  docker.io/nginx/nginx
+        registry  User    image
+                  account repository
+
+4. Google's registry is at gcr.io where a lot of kubernetes related images are stored.
+
+5. Private registry - Many cloud providers such as AWS , Azure or GCP provide a private registry by default.
+
+login to private registry
+
+docker login private-registry.io
+
+docker run private-registry.io/apps/internal-app
+
+6. Deploy private registry
+
+How to deploy your own private repository within your organization
+
+The docker registry in itself is another application and is available as a docker image , the name of the image is "registry" and it exposes the API on port 5000 . 
+
+-> Run your private registry at port 5000 
+
+• docker run -d -p 5000:5000 --name registry registry:2
+
+-> Now that you have your custom registry running at docker host port 5000 , how do u push your own image to it?
+
+• docker image tag my-image localhost:5000/my-image
+
+-> push the docker image to local private repository
+
+docker push localhost:5000/my-image
+
+-> pulll the image
+
+docker pull localhost:5000/my-image
+
+        OR
+docker pull 192.168.56.100:5000/my-image
+
