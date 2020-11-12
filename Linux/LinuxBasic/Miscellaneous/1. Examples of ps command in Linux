@@ -1,0 +1,47 @@
+1. ps -fu example.
+
+for seeing processes running under app_ev username
+
+ps -fu app_ev
+
+2. ps+ grep example.
+
+ps command to find all java host in your Unix host
+
+ps -ef|grep java
+
+3. !ps example
+
+a shortcut for running last ps command
+
+!ps
+
+4.ps -ef|wc exmaple
+
+ps command to find the number of processes running in your linux server
+
+ps -ef|wc -l
+
+5. ps -ef command exmaple
+
+ps command to see the full command-line arguments used to start a process for every user in the Linux server
+
+ps -ef
+
+6. ps command example
+
+to see the processes for current user
+
+ps
+
+7. ps -f example
+
+ps command to see the full information of all the processes for the current user
+
+8. ps -e example
+
+ps command to see every process running on the linux system
+
+9. ps -auxwww example
+
+ps command to show full arguments for really long commands used to start a process
