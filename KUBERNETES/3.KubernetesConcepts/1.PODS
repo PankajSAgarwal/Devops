@@ -1,0 +1,56 @@
+1. Assumptions
+
+- Application is already built as Docker image and available to download from dockerhub
+- Kubernetes cluster(either a single node or multi node cluster is already set up)
+
+2. With kubernetes , ultimate aim is to deploy application in the form of containers on a set of machines that are configured as worker nodes in a cluster.
+
+However, kubernetes does not deploy containers directly on the workers nodes. 
+The containers are enacapsulated into a kubernetes object known as pods.
+
+3. A pod is a single instance of application. A pod is the smallest object that you can create in Kubernetes.
+
+4. Let say if you have a single node kubernetes cluster with a single instance of application running in a single docker container enacapsulated in a pod.
+
+What if the number of user accessing your application increase and you need to scale your application, you need to add additional instances of your web application to share the load . Now where would you spin up additional instances . 
+
+Do we spin up additional instances within the same pod?
+
+No, we create a new pod altogether with a new instance of the same application
+
+What if the user base further increases and your current node has no further capacity ?
+
+You can deploy additional pods on a new node in the cluster.You will have a new node added to the cluster to expand cluster physical capacity.
+
+5. Pods usually have one to one relationship with containers running your application.
+
+To scale up u create new pods and to scale down , you delete existing pods.You do not add additional containers to an existing pod to scale your application.
+
+6. Are we restricted to having a single container in a single pod.
+
+No, a single pod can have multiple containers, except for the fact that they are not multiple containers of the same kind.
+
+If our intent is to scale our application, then we would need to create additional pods.
+
+But sometimes you might have a scenario where you have a helper container that might be doing some supporting tasks for our web application, such as processing a user-eneterd data, processing a file uploaded by the user, etc. and you want this helper containers to live alongside your application container.In that case you can have both of these containers part of tyhe same pod, so that when a new application container is created, the helper is also created and when it dies, the helper also dies since they are part of same pod.
+The two containers can also communicate with each other directly by referring to each other as localhost, since they share the same network space.Plus they can share the same storage space as well.
+
+7. Deploying a pod
+
+• kubectl run nginx
+
+- This command deploys a docker container by creating a pod.
+
+It first creates a pod automatically and deploys an instance of nginx docker image.
+
+Where does it gets application image from?
+
+kubectl run nginx --image nginx
+
+You can configure kubernetes to pull image from public docker hub or private docker registry
+
+8. See the list of pods available in our cluster
+
+kubectl get pods
+
+Status - ContainerCreating, Running

@@ -1,0 +1,42 @@
+1. create a pod
+
+kubectl run nginx --image=nginx
+
+o/p: pod/ngnix created
+
+2. get pods
+
+kubectl get pods
+
+
+<<output>>
+NAME  READY   STATUS    RESTARTS  AGE
+nginx 1/1     Running   0         3s
+
+3. kubectl describe pod nginx - provides more details than get pods command
+
+Name: nginx
+Namespace: default
+Priority: 0
+Node: minikube/192.168.99.100
+Start Time: Sat, 11 Jul 2020 00:49:39 -0400
+Labels: run=nginx
+Annotations: <none>
+Status: Running
+IP: 172.17.0.3
+IPs:
+ IP: 172.17.0.3
+Containers: 
+  nginx: 
+   Container ID: docker://987785...
+   Image:
+   ....
+
+4. kubectl get pods -o wide
+
+gives more details about pod including IP of the pod
+
+
+NAME  READY   STATUS    RESTARTS  AGE   IP        Node      NOMINATED NODE  READINESS GATES 
+nginx 1/1     Running   0         3s  172.17.0.3  Minikube    <none>
+
