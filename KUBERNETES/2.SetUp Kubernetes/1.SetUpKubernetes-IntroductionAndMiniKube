@@ -1,6 +1,6 @@
 1. Minikube and Microk8s - These are solution for developers or those who just want to play around and learn kubernetes 
 
-2. Kubadm - The Kubeadm tool is used to bootstrap and manage production-grade kubernetes clusters.
+2. Kubeadm - The Kubeadm tool is used to bootstrap and manage production-grade kubernetes clusters.
 
 3. There are also hosted solution available for setting up kubernetes in a cloud environment like GCP,AWS or azure.
 
@@ -18,7 +18,7 @@
 
 The whole bundle is packaged into an ISO image and its available online for download
 
-Minikube provides an executable commandline utility that will automatically download the ISo and deploy in virtualization platform like Oracle VirtualBox or VMWare Fusion.
+Minikube provides an executable commandline utility that will automatically download the ISO and deploy in virtualization platform like Oracle VirtualBox or VMWare Fusion.
 
 So you must have a hypervisor installed on your system. For Windows you can use VirtualBox or Hyperv and for linux you can use VirtualBox or KVM.
 
@@ -28,5 +28,7 @@ So u need 3 things installed in ur system.
 • Hypervisor
 • kubectl utility
 • Minikube executable
+
+
 
 
