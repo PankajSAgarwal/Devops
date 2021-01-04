@@ -1,0 +1,123 @@
+1. Key Value pair
+
+Fruit: Apple
+Vegetable: Carrot
+Liquid: Water
+Meat: Chicken
+
+2. Arrays/Lists
+
+Fruits:
+- Orange
+- Apple
+- Banana
+
+Vegetables: 
+- Carrot
+- Cauliflower
+- Tomato
+
+3. Dictionary
+
+Banana:
+  Calories: 105
+  Fat: 0.4 g
+  Carbs: 27 g
+
+Grapes:
+  Calories: 62
+  Fat: 0.3 g
+  Carbs: 16 g
+
+4. To store properties of a single object, we use dictionary. eg a car with properties like color,model,transmission,price
+
+Car:
+  color: Blue
+  model: Corvertte
+  Transmission: Manual
+  Price: $20,000
+
+5. Dictionary within another dictionary
+ If model of a car is split into Name and Year
+
+Car:
+  color: Blue
+  model: 
+    Name: Corvertte
+    Year: 1995
+  Transmission: Manual
+  Price: $20,000
+
+6. List
+
+If you need to store name of  6 different cars
+
+List of Strings
+
+- Blue Corvertte
+- Green Corvertte
+- Grey Corvertte
+- Red Corvertte
+- Blue Corvertte
+- Black Corvertte
+
+7. List of Dictionaries
+
+Car:
+- color: Blue
+  model: 
+    Name: Corvertte
+    Year: 1995
+  Transmission: Manual
+  Price: $20,000
+- color: Green
+  model: 
+    Name: Corvertte
+    Year: 1995
+  Transmission: Manual
+  Price: $20,000
+- color: Red
+  model: 
+    Name: Corvertte
+    Year: 1995
+  Transmission: Automatic
+  Price: $20,000
+
+8. Dictionary is un-ordered collection
+List is ordered collection
+
+a) Dictionary/Map
+
+Banana:                                                          
+  Calories: 185
+  Fat: 0.4 g
+  Carbs: 27 g
+
+    =====
+
+Banana:                                                          
+  Calories: 185
+  Carbs: 27 g
+  Fat: 0.4 g
+
+b) Array/List
+
+Fruits:
+- Orange
+- Apple
+- Banana
+
+is not equal to 
+
+Fruits:
+  - Orange
+  - Banana
+  - Apple
+
+9. Comments
+
+# List of fruits
+Fruits:
+  - Orange
+  - Banana
+  - Apple
