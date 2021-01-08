@@ -1,0 +1,304 @@
+1. How many PODs exist on the system?
+
+
+Ans : Run the command 'kubectl get pods' and count the number of pods.
+
+No resources found in default namespace is output if no pods.
+
+2. Create a new pod with the NGINX image
+
+Ans: Run the command 'kubectl run nginx --image=nginx'
+
+output : pod/nginx created
+
+3.How many pods are created now?
+
+Ans: Run the command 'kubectl get pods' and count the number of pods.
+
+
+output: 
+
+NAME            READY   STATUS    RESTARTS   AGE
+newpods-4256k   1/1     Running   0          23s
+newpods-b45g9   1/1     Running   0          23s
+newpods-nwv84   1/1     Running   0          23s
+nginx           1/1     Running   0          47s
+
+4. What is the image used to create the new pods?
+
+
+You must look at one of the new pods in detail to figure this out
+
+Ans : Run the command 'kubectl describe pod newpod-' or 'kubectl get pods -o wide' and look under the containers section.
+
+5. Which nodes are these pods placed on?
+
+You must look at all the pods in detail to figure this out
+
+Ans: Run the command 'kubectl describe pod newpod-' and look under the containers section.
+
+
+Output: 
+
+Name:         newpods-4256k
+Namespace:    default
+Priority:     0
+Node:         node01/172.17.0.51
+Start Time:   Tue, 05 Jan 2021 07:13:36 +0000
+Labels:       tier=busybox
+Annotations:  <none>
+Status:       Running
+IP:           10.244.1.6
+IPs:
+  IP:           10.244.1.6
+Controlled By:  ReplicaSet/newpods
+Containers:
+  busybox:
+    Container ID:  docker://ff345010ab25386fdd5c29ad8a1905cd337217b844939cd344f1e0ec53753791
+    Image:         busybox
+    Image ID:      docker-pullable://busybox@sha256:49dae530fd5fee674a6b0d3da89a380fc93746095e7eca0f1b70188a95fd5d71
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sleep
+      1000
+    State:          Running
+      Started:      Tue, 05 Jan 2021 07:13:41 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-pnfts (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  default-token-pnfts:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-pnfts
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                 node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  4m50s  default-scheduler  Successfully assigned default/newpods-4256k to node01
+  Normal  Pulling    4m48s  kubelet, node01    Pulling image "busybox"
+  Normal  Pulled     4m46s  kubelet, node01    Successfully pulled image "busybox" in 2.330965274s
+  Normal  Created    4m45s  kubelet, node01    Created container busybox
+  Normal  Started    4m45s  kubelet, node01    Started container busybox
+
+6. How many containers are part of the pod 'webapp'?
+
+Note: We just created a new POD. Ignore the state of the POD for now.
+
+Ans: Run the command 'kubectl describe pod webapp' and look under the Containers section.
+
+2 Containers , nginx and agentz as shown below
+
+Output
+
+controlplane $ kubectl describe pod webapp
+Name:         webapp
+Namespace:    default
+Priority:     0
+Node:         node01/172.17.0.51
+Start Time:   Tue, 05 Jan 2021 07:19:39 +0000
+Labels:       <none>
+Annotations:  <none>
+Status:       Pending
+IP:           10.244.1.7
+IPs:
+  IP:  10.244.1.7
+Containers:
+  nginx:
+    Container ID:   docker://77980278238b4a9eb5ae64aad0d0f5119c6fd76c7e7f65bcb542d99e8d8561b9
+    Image:          nginx
+    Image ID:       docker-pullable://nginx@sha256:4cf620a5c81390ee209398ecc18e5fb9dd0f5155cd82adcbae532fec94006fb9
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 05 Jan 2021 07:19:41 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-pnfts (ro)
+  agentx:
+    Container ID:
+    Image:          agentx
+    Image ID:
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       ImagePullBackOff
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-pnfts (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  default-token-pnfts:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-pnfts
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                 node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                From               Message
+  ----     ------     ----               ----               -------
+  Normal   Scheduled  88s                default-scheduler  Successfully assigned default/webapp to node01
+  Normal   Pulling    87s                kubelet, node01    Pulling image "nginx"
+  Normal   Pulled     87s                kubelet, node01    Successfully pulled image "nginx" in 500.580692ms
+  Normal   Created    87s                kubelet, node01    Created container nginx
+  Normal   Started    86s                kubelet, node01    Started container nginx
+  Normal   Pulling    44s (x3 over 86s)  kubelet, node01    Pulling image "agentx"
+  Warning  Failed     42s (x3 over 85s)  kubelet, node01    Failed to pull image "agentx": rpc error: code = Unknown desc = Error response from daemon: pull access denied for agentx, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+  Warning  Failed     42s (x3 over 85s)  kubelet, node01    Error: ErrImagePull
+  Normal   BackOff    5s (x5 over 84s)   kubelet, node01    Back-off pulling image "agentx"
+  Warning  Failed     5s (x5 over 84s)   kubelet, node01    Error: ImagePullBackOff
+
+7. What images are used in the new 'webapp' pod?
+
+You must look at all the pods in detail to figure this out
+
+Run the command 'kubectl describe pod webapp' and look under the containers section.
+
+
+Ans: kubectl describe pod webapp
+
+nginx and agentx
+
+8. What is the state of the container 'agentx' in the pod 'webapp'?
+
+Wait for it to finish the 'ContainerCreating' state
+
+Run the command 'kubectl describe pod webapp' and look under the containers section.
+
+Ans: waiting or error
+
+ agentx:
+    Container ID:
+    Image:          agentx
+    Image ID:
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       ImagePullBackOff
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+
+9. Why do you think the container 'agentx' in pod 'webapp' is in error?
+
+Try to figure it out from the events section of the pod
+
+Hint: Run the command 'kubectl describe pod webapp' and look under the events section.
+
+Ans: A docker image with this name does not exist in the Docker Hub
+
+Events:
+  Type     Reason     Age                   From               Message
+  ----     ------     ----                  ----               -------
+  Normal   Scheduled  8m4s                  default-scheduler  Successfully assigned default/webapp to node01
+  Normal   Pulling    8m3s                  kubelet, node01    Pulling image "nginx"
+  Normal   Pulled     8m3s                  kubelet, node01    Successfully pulled image "nginx" in 500.580692ms
+  Normal   Created    8m3s                  kubelet, node01    Created container nginx
+  Normal   Started    8m2s                  kubelet, node01    Started container nginx
+  Warning  Failed     7m18s (x3 over 8m1s)  kubelet, node01    Error: ErrImagePull
+  Normal   BackOff    6m41s (x5 over 8m)    kubelet, node01    Back-off pulling image "agentx"
+  Normal   Pulling    6m26s (x4 over 8m2s)  kubelet, node01    Pulling image "agentx"
+  Warning  Failed     6m24s (x4 over 8m1s)  kubelet, node01    Failed to pull image "agentx": rpc error: code = Unknown desc = Error response from daemon: pull access denied for agentx, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+  Warning  Failed     2m54s (x20 over 8m)   kubelet, node01    Error: ImagePullBackOff
+
+10. What does the READY column in the output of the 'kubectl get pods' command indicate?
+
+Hint: Run the command 'kubectl get pods'.
+
+controlplane $ kubectl get pods
+NAME            READY   STATUS             RESTARTS   AGE
+newpods-4256k   1/1     Running            0          16m
+newpods-b45g9   0/1     Completed          0          16m
+newpods-nwv84   1/1     Running            0          16m
+nginx           1/1     Running            0          17m
+webapp          1/2     ImagePullBackOff   0          10m
+
+
+Ans: Running Containers  in Pod/ Total no of conatiners in Pod
+
+11. Delete the 'webapp' Pod.
+
+Once deleted, wait for the pod to fully terminate.
+
+Hint: Run the command 'kubectl delete pod webapp'.
+
+
+Ans: kubectl delete pod webapp
+
+pod "webapp" deleted
+
+12. Create a new pod with the name 'redis' and with the image 'redis123'
+
+
+Use a pod-definition YAML file. And yes the image name is wrong!
+
+Name: redis
+Image Name: redis123
+
+Hint:Create a pod definition YAML file and use it to create a POD or use the command kubectl run redis --image=redis123.
+
+redis.yaml
+-----------
+apiVersion: v1
+kind: Podmetadata:
+  name: redis
+  labels:
+    env: production
+spec:
+  containers:
+    - name: redis
+      image: redis123
+
+
+
+controlplane $ kubectl create -f redis.yaml
+pod/redis created
+
+13. Now fix the image on the pod to 'redis'.
+
+Update the pod-definition file and use 'kubectl apply' command or use 'kubectl edit pod redis' command.
+
+
+Name: redis
+Image Name: redis
+
+Ans: controlplane $ kubectl edit pod redis
+pod/redis edited
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

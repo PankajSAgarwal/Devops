@@ -1,0 +1,36 @@
+1. vim pod.yaml
+
+apiVersion: v1
+kind: pod
+metadata:
+  name: nginx
+  labels: 
+    app: nginx
+    tier: frontend
+spec:
+  containers:
+  - name: ngnix
+  - image: nginx
+
+***Note***: Specify the full path to the image repository if you are using any other repository than Docker Hub. 
+
+2. Create Pod
+
+kubectl apply -f pod.yaml
+
+output : pod/nginx created
+
+***Note***: Kubectl create and kubectl apply command works the same when creating new kubernetes object
+
+3. To check the status of the pod
+
+kubectl get pods
+
+Name  Ready   Status    Restarts  Age
+nginx 1/1      Running  0         2s
+
+4. To get more details on pod
+
+kubectl describe pod <<name of the pod>>
+
+e.g kubectl pod nginx

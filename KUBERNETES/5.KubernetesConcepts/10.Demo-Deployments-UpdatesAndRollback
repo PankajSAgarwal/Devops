@@ -1,0 +1,23 @@
+1.>kubectl get pods
+2.>kubectl create -f deployment.yaml
+3.>kubectl rollout status deployment deployment.apps/myapp-deployment
+4.>kubectl rollout history deployment.apps/myapp-deployment
+5.>kubectl create -f deployment.yaml --record
+
+--record records the cause of Change
+
+>kubectl rollout history deployment.apps/myapp-deployment
+
+deployment.apps/myapp-deployment
+REVISION    CHANGE-CAUSE
+1            kubectl create --filename=deployment.yaml --record=true
+
+6.>kubectl describe deployment myapp-deployment
+
+the Annotations section in the output of describe command records the command used to create the deployment
+
+7.>kubectl edit deployment myapp-deployment --record
+
+8.>kubectl set image deployment myapp-deployment nginx=nginx:1.18-perl --record
+
+9. >kubectl rollout undo deployment/myapp-deployment

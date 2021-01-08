@@ -1,0 +1,101 @@
+1. When you first create a deployment, it triggers a rollout. A new roll out creates a new deployment revision.Lets call it Revision 1.
+
+2. In future when the application is upgraded meaning when the container version is updated to a new one , a new rollout is triggered and a new deployment revision is created named Revision 2.
+
+3. This helps us to keep track of the changes made by our deployment and enable us to rollback to a previous version of deployment if necessary.
+
+4. To see the status of your rollout
+
+>kubectl rollout status <<name of the deployment>>
+
+>kubectl rollback status deployment/myapp-deployment
+
+5. To see the revision and history of rollout
+
+>kubectl rollout history deployment/myapp-deployment
+
+6. There are two types of Deployment strategies
+
+a) Recreate Strategy
+
+- Let say we have 5 instances of our webapplication running
+
+- One way to upgrade these to a newer version is to destory all of these and then create new version of application instances.
+
+- Meaning first destroy the 5 running instances and then deploy the 5 new instances of the new application.
+
+- The problem with this strategy is that during the period after which older versions are down and before a newer version is up , application is down and inaccessible to users.
+
+- This startegy is called the Recreate strategy and it is not the default strategy.`
+
+b) Rolling Update
+
+- The second strategy is where we do not destroy all of them at once . Instead we take down the older version and bring up a newer version one by one.
+
+- This way application never goes down and the upgrade is seamless.
+
+7. If you do not specify a strategy while creating the deployment, it will assume it to be a rolling update strategy.
+
+8. kubectl apply
+
+if you have a deployment definition file , after updating the file for changes (like updating version of containers, updating labels, or updating number of replicas), run kubectl apply command to apply the changes
+
+kubectl apply -f deployment-definition.yml
+
+With this a new rollout is triggered and a new revision of the deployment is created.
+
+9. Kubectl set image command to update the image of your application the same thing as kubectl apply command does. But doing it this way will result in the different deployment definition file having a different configuration. 
+
+>kubectl set image deployment/myapp-deployment nginx=nginx:1.9.1
+
+So you must be careful when using the same definition file to make changes in the future.
+
+10. To undo a change 
+
+kubectl rollout undo deployment/myapp-deployment
+
+The deployment will destroy the pods in the new replica set and bring up the pods in the old replica set.
+
+11. Kubctl run
+
+- This creates a deployment and not just a pod.
+> kubectl run nginx --image=nginx
+
+- This is another way of creating a deployment by only specifying the image name and not using a definition file
+
+- Using a definition file is recommended as you can check in the definition file in a source code repository and modify it later as required
+
+12. Command summary
+
+a) Create deployment
+
+>kubectl create -f deployment deployment-definition.yml
+
+b) to list the deployments
+
+>kubectl get deployments
+
+c) to update the deployments
+
+>kubectl apply -f deployment-definition.yml
+
+>kubectl set image deployment/myapp-deployment nginx=nginx:1.9.1
+
+d) To see status of rollout
+
+>kubectl rollout status deployment/myapp-deployment
+
+> kubectl rollout history deployment/myapp-deployment
+
+e) to roll back a deployment operation
+
+>kubectl rollout undo deployment/myapp-deployment
+
+
+
+
+
+
+
+
+

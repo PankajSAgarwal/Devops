@@ -1,0 +1,9 @@
+1.Install YAML extension by Redhat in VSCode
+
+make changes in the settings.json of the extension under schemas
+
+YAML>Settings>Extension Settings>YAML:Schemas>Edit in settings.json
+
+  "yaml.schemas": {
+     "kubernetes": "*.yaml"
+  }

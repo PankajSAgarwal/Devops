@@ -1,0 +1,144 @@
+1. Controllers are the brain behind Kubernetes . They are the processes that monitor the Kubernetes Objects and respond accordingly.
+
+2. What is a replica and why we need a replication controller?
+
+The replication controller helps us run multiple instances of a single pod in kubernetes cluster thus ensuring High Availability.
+
+Even if you need a single pod, replication controller can be used to bring up a new pod when the existing one fails.
+
+Thus replication controller helps in ensuring the specified number of pods are running all the time even if it is 1 or 100.
+
+Replication controllers also helps in Load balancing and scaling by spanning across multiple nodes in a cluster. It helps us balance the load across multiple pods on different nodes as well as scale our application when the demand increases.
+
+3. Replication Controllers and Replica Set have the same functionality but are different . Replication controllers is the older technology that is being replaced by Replica Set.
+
+Replica Set is the new recommended way to set up replication.
+
+4. Creating a Replication Controller definition file
+
+
+rc.definition.yml
+-------------------
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: myapp-rc
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  template:
+
+    metadata:
+      name: myapp-pod
+      labels:
+        app: myapp
+        type: front-end
+    spec:
+      containers:
+      - name: nginx-controller
+        image: nginx
+
+  replicas: 3
+
+>kubectl create -f rc-definition.yml
+
+replication controller "myapp-rc" file created
+
+>kubectl get replicationcontroller
+
+Name      DESIRED   CURRENT   READY   AGE
+myapp-rc  3         3         3       10s
+
+To see the pods created by replication controller
+
+> kubectl get pods
+
+NAME            READY       STATUS      RESTARTS    AGE
+myapp-rc-41vk9  1/1         Running     0           20s
+myapp-rc-mc2mf  1/1         Running     0           20s
+myapp-rc-px9pz  1/1         Running     0           20s
+
+
+5. Relica Set Definition file
+
+replicaset-definition.yml
+--------------------------------
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-replicaset
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  template:
+
+    metadata:
+      name: myapp-pod
+      labels:
+        app: myapp
+        type: front-end
+    spec:
+      containers:
+      - name: nginx-controller
+        image: nginx
+
+  replicas: 3
+  selector:
+    matchLabels:
+      type: front-end
+
+
+*****Note*****: selector is a required field in ReplicaSet whereas optional in ReplicaController
+
+A replicaset can also launch pods which were created before replicaset drfinition file was created and arent mentioned in template definition. These pods needs to be specified in selector section of the replicaset definition file.
+
+>kubectl create -f replicaset-definition.yml
+replicaset "myapp-replicaset" created
+>kubectl get replicaset
+
+Name              DESIRED   CURRENT   READY     AGE
+myapp-replicaset    3         3         3        10s
+
+To get the pods created by replicaset
+
+>kubectl get pods
+
+6. How to update replicas from 3 to 6
+
+Way1: Update the number of replicas in replicaset definition file from 3 to 6
+
+>kubectl replace -f replicaset-definition.yml
+
+Way2: kubectl scale --replicas=6 -f replicaset-definition.yml
+
+Also can use another varaiant of kubectl scale command
+
+kubectl scale --replicas=6 replicaset myapp-replicaset
+                           <<TYPE>>   <<APP NAM>>   
+*******Note*****
+kubectl scale command will scale replicas to 6 but will not update the number of replicas from 3 to 6 in replicaset definition file.
+
+7. Review of Replicaset Commands
+
+> kubectl create -f replicaset-definition.yml
+> kubectl get replicaset
+** Delete Replicaset. Also deletes all underlying pods
+> kubectl delete replicaset myapp-replicaset 
+> kubectl replace -f replicaset-definition.yml
+> kubectl sclae --replicas=6 -f replicaset-definition.yml
+
+** To describe replicaset
+
+>kubectl describe replicaset myapp-replicaset
+
+You can also use rs instead of replicaset in the command
+
+>kubectl describe rs myapp-replicaset
+
+
+
+

@@ -1,0 +1,112 @@
+1. How many PODs exist on the system?
+
+
+in the current(default) namespace
+
+Hint: Run the command 'kubectl get pods' and count the number of pods.
+
+
+2. How many ReplicaSets exist on the system?
+
+
+in the current(default) namespace
+
+Hint: Run the command 'kubectl get replicaset' or "kubectl get rs" and count the number of ReplicaSets.
+
+3. How many Deployments exist on the system?
+
+
+in the current(default) namespace
+
+
+Hint:Run the command 'kubectl get deployment' and count the number of Deployments.
+
+
+4. How many Deployments exist on the system now?
+
+We just created a Deployment! Check again!
+
+Hint:  Run the command 'kubectl get deployment' and count the number of deployments.
+Ans: 
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+frontend-deployment   0/4     4            0           33s
+
+5. How many ReplicaSets exist on the system now?
+
+
+Hint: Run the command 'kubectl get replicaset' and count the number of ReplicaSets.
+
+
+Ans: 
+controlplane $ kubectl get rs
+NAME                             DESIRED   CURRENT   READY   AGE
+frontend-deployment-56d8ff5458   4         4         0       83s
+
+6. How many PODs exist on the system now?
+
+Hint: Run the command 'kubectl get pods' and count the number of PODs.
+
+
+controlplane $ kubectl get pods
+NAME                                   READY   STATUS             RESTARTS   AGE
+frontend-deployment-56d8ff5458-69kb5   0/1     ImagePullBackOff   0          2m24s
+frontend-deployment-56d8ff5458-ccx6p   0/1     ImagePullBackOff   0          2m24s
+frontend-deployment-56d8ff5458-q8pq4   0/1     ImagePullBackOff   0          2m24s
+frontend-deployment-56d8ff5458-v7wc8   0/1     ImagePullBackOff   0          2m24s
+
+7. What is the image used to create the pods in the new deployment?
+
+Hint:
+Run the command 'kubectl describe deployment' and look under the containers section.
+
+8. Why do you think the deployment is not ready?
+
+
+Hint: Run the command 'kubectl describe pods' and look under the events section.
+9. Create a new Deployment using the 'deployment-definition-1.yaml' file located at /root/
+
+
+Hint: The value for 'kind' is incorrect. It should be 'Deployment' with a capital 'D'.
+
+
+9. Create a new Deployment with the below attributes using your own deployment definition file
+
+
+Name: httpd-frontend; Replicas: 3; Image: httpd:2.4-alpine
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  labels:
+    tier: frontend
+    app: nginx
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  replicas: 3
+  template:
+    metadata:
+      name: nginx-2
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          command:
+          - sh
+          - "-c"
+          - echo Hello Kubernetes! && sleep 3600  
+
+
+
+
+
+
+
+
+
+

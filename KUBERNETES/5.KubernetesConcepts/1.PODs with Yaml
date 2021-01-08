@@ -1,0 +1,107 @@
+1. pod-definition.yml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
+
+A kubernetes definition file always contains 4 top level fields
+
+- apiVersion
+- kind
+- metadata
+- spec
+
+2. kubectl create -f pod-definition.yml
+
+3. Kubernetes uses yaml files as inputs for the creation of objects such as PODS,replicas,deployments,services etc.
+
+4. A kubernetes definition file always contains 4 top level fields .
+
+These are the top level or root level properties
+
+These are also required fields. So you must have them in your configuration file
+
+apiVersion,kind,metadata,spec
+
+5. apiVersion
+
+This is the version of kubernetes api you are using to create objects. 
+Depending on the obejcts being created , we must set the right apiVersion for the object.
+
+For pod , apiVersion is v1.
+
+6. kind
+
+The kind refers to the type of object we are trying to create, which in this case happens to be Pod.
+
+Kind                              Version
+Pod                               v1
+Service                           v1
+ReplicaSet                        apps/v1
+Deployment                        apps/v1
+
+7. metadata
+
+• metadata is the data about the object like its name, labels, etc.
+
+• metadata is in the form of a dictionary.
+
+• It is important to note that under metadata you can only specify name or labels or anything else that Kubernetes expects to be under metadata. You cannot add any other properties as you wish under this.
+
+However under labels , you can have any kind of key value pair as you see fit.
+
+pod-definition.yml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
+
+8. spec
+
+Depending on the obejct we are going to create , this is where we will provide additional information to kubernetes pertaining to that object.
+
+This is going to be different for different objects, so its important to understand or refer the documentation section to get the right format for the each.
+
+Since we are creating a pod with a single container in it , It is easy
+spec is dictionary. So add a property under it called containers. 
+Container is a list or an array.
+
+The reason this property is a list because the pods can have multiple containers within them.In this case though we will add only a single item in the list, sicne we plan to have a single container in the pod.
+
+The dash(-) before the name indicates this is the first item in the list
+
+9. Create pod command
+
+kubectl create -f pod-definition.yml
+
+10. see the pods created
+
+kubectl get pods
+
+11. To see detailed information on a pod
+
+kubectl describe pod myapp-pod
+
+This command tells information about the pod , when it was created , what lables are assigned to it ,what docker containers are part of it and the events associated with that pods
+
+
+
+
+
+

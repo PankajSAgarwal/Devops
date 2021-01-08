@@ -1,0 +1,208 @@
+1. How many PODs exist on the system?
+in the current(default) namespace
+
+Hint: Run the command 'kubectl get pods' and count the number of pods.
+
+Ans: controlplane $ kubectl get pods
+No resources found in default namespace.
+
+2. How many ReplicaSets exist on the system?
+
+in the current(default) namespace
+
+Hint: Run the command 'kubectl get replicaset' and count the number of replicasets.
+
+
+Ans: controlplane $ kubectl get replicaset
+No resources found in default namespace
+
+3. How about now? How many ReplicaSets do you see?
+
+We just made a few changes!
+
+Hint: Run the command 'kubectl get replicaset'.
+
+
+controlplane $ kubectl get replicaset
+NAME              DESIRED   CURRENT   READY   AGE
+new-replica-set   4         4         0       32s
+
+4. How many PODs are DESIRED in the new-replica-set?
+
+Hint: Run the command 'kubectl get replicaset' and look at the count under the 'Desired' column
+
+Ans: 4
+
+5. What is the image used to create the pods in the new-replica-set?
+
+Hint: Run the command 'kubectl describe replicaset' and look under the containers section.
+
+
+Ans: busybox777
+
+controlplane $ kubectl describe replicaset
+Name:         new-replica-set
+Namespace:    default
+Selector:     name=busybox-pod
+Labels:       <none>
+Annotations:  <none>
+Replicas:     4 current / 4 desired
+Pods Status:  0 Running / 4 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  name=busybox-pod
+  Containers:
+   busybox-container:
+    Image:      busybox777
+    Port:       <none>
+    Host Port:  <none>
+    Command:
+      sh
+      -c
+      echo Hello Kubernetes! && sleep 3600
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age   From                   Message
+  ----    ------            ----  ----                   -------
+  Normal  SuccessfulCreate  2m2s  replicaset-controller  Created pod: new-replica-set-ljcg7
+  Normal  SuccessfulCreate  2m2s  replicaset-controller  Created pod: new-replica-set-vmfh5
+  Normal  SuccessfulCreate  2m2s  replicaset-controller  Created pod: new-replica-set-vtj92
+  Normal  SuccessfulCreate  2m2s  replicaset-controller  Created pod: new-replica-set-d9267
+
+6. How many PODs are READY in the new-replica-set?
+
+Hint: Run the command 'kubectl get replicaset' and look at the count under the 'Ready' column
+
+Ans: 0
+
+controlplane $ kubectl get replicaset
+NAME              DESIRED   CURRENT   READY   AGE
+new-replica-set   4         4         0       3m43s
+
+7. Why do you think the PODs are not ready?
+
+Hint: Run the command 'kubectl describe pods' and look under the events section.
+
+Events:
+  Type     Reason     Age                    From               Message
+  ----     ------     ----                   ----               -------
+  Normal   Scheduled  5m33s                  default-scheduler  Successfully assigned default/new-replica-set-vtj92 to node01
+  Normal   Pulling    3m50s (x4 over 5m28s)  kubelet, node01    Pulling image "busybox777"
+  Warning  Failed     3m48s (x4 over 5m22s)  kubelet, node01    Failed to pull image "busybox777": rpc error: code = Unknown desc = Error response from daemon: pull access denied for busybox777, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+  Warning  Failed     3m48s (x4 over 5m22s)  kubelet, node01    Error: ErrImagePull
+  Normal   BackOff    3m37s (x6 over 5m21s)  kubelet, node01    Back-off pulling image "busybox777"
+  Warning  Failed     19s (x20 over 5m21s)   kubelet, node01    Error: ImagePullBackOff
+
+  Ans: The image BUSYBOX777 doesnt exist
+
+  8. Delete any one of the 4 PODs
+
+  Hint: Run the command 'kubectl delete pod '
+
+  9. Why are there still 4 PODs, even after you deleted one?
+
+Ans: Replicaset ensures that desired number of pods always run.
+
+10. Create a ReplicaSet using the 'replicaset-definition-1.yaml' file located at /root/
+
+There is an issue with the file, so fix it.
+
+Ans : 
+
+The value for 'apiVersion' is incorrect. Find the correct apiVersion for ReplicaSet.Run: kubectl explain replicaset|grep VERSION
+
+11. Fix the issue in the replicaset-definition-2.yaml file and create a ReplicaSet using it.
+
+This file is located at /root/
+
+Hint: The values for labels on lines 9 and 13 should match.
+
+12. Delete the two newly created ReplicaSets - replicaset-1 and replicaset-2
+
+Hint: Run the command 'kubectl delete replicaset '
+
+13. Fix the original replica set 'new-replica-set' to use the correct 'busybox' image
+
+Either delete and re-create the ReplicaSet or Update the existing ReplicSet and then delete all PODs, so new ones with the correct image will be created.
+
+Hint: Run the command 'kubectl edit replicaset new-replica-set', modify the image name and then save the file.
+
+Ans:
+
+a) One way: If you delete the replicaset , you dont have the replicaset definition file as these was created automatically. So one option is to edit replicaset and delete existing pod
+kubectl edit rs new-replica-set
+kubectl delete pod <<podname>>
+
+b) Second way is to get the yaml definition file of the replica set first and then delete the replica set and then recreate new replica set.
+
+i) get the yaml file for replicaset
+
+kubectl get rs new-replica-set -o yaml > new-replica-set.yaml
+
+ii) delete the replicaset
+
+kubectl delete rs new-replica-set
+
+iii) create a new replicaset with definition file created in step i)
+
+kubectl create -f new-replica-set.yaml
+
+iv) Check the replicaset
+
+kubectl get rs
+
+v) check pods in replicaset
+
+kubectl get pods
+
+
+
+
+
+
+14. Scale the ReplicaSet to 5 PODs
+
+Use 'kubectl scale' command or edit the replicaset using 'kubectl edit replicaset'
+
+Hint: Run the command 'kubectl edit replicaset new-replica-set', modify the replicas and then save the file.
+
+Ans: controlplane $ kubectl scale replicaset new-replica-set --replicas=5
+                            OR
+    controlplane $ kubectl scale rs new-replica-set --replicas=5                
+
+replicaset.apps/new-replica-set scaled
+
+15. Now scale the ReplicaSet down to 2 PODs
+
+
+Use 'kubectl scale' command or edit the replicaset using 'kubectl edit replicaset'
+
+Hint: Run the command 'kubectl edit replicaset new-replica-set', modify the replicas and then save the file.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
